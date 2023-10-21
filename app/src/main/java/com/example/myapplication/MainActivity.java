@@ -5,54 +5,45 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
-//    private TabLayout tabLayout;
-//    private ViewPager2 viewPager2;
-//    private ViewPagerAdapter adapter;
-    //htkh
-
+    private Button login;
+    private Button signup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        login = (Button) findViewById(R.id.signin_btn);
+        signup = (Button) findViewById(R.id.signup_btn);
+        //mở trang login
+        login.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(MainActivity.this, MainActivity2.class);
+                int data = 0;
+                it.putExtra("key", data);
+                startActivity(it);
+            }
+        });
+        //mở trang signup
+        signup.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(MainActivity.this, MainActivity2.class);
+                int data = 1;
+                it.putExtra("key", data);
+                startActivity(it);
+            }
+        });
 
-//        tabLayout=findViewById(R.id.tab_layout);
-//        viewPager2=findViewById(R.id.view_pager);
-//
-//        tabLayout.addTab(tabLayout.newTab().setText("Login"));
-//        tabLayout.addTab(tabLayout.newTab().setText("Signup"));
-//
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        adapter = new ViewPagerAdapter(fragmentManager,getLifecycle());
-//        viewPager2.setAdapter(adapter);
-//
-//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                viewPager2.setCurrentItem(tab.getPosition());
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
-//
-//        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-//            @Override
-//            public void onPageSelected(int position) {
-//                tabLayout.selectTab(tabLayout.getTabAt(position));
-//            }
-//        });
+
+
 
     }
 }

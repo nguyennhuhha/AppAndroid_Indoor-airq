@@ -29,7 +29,7 @@
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/robotobold"
-        android:text="Sign in"
+        android:text="Log in"
         android:textColor="@color/dark_greenlv1"
         android:textSize="24sp"
         app:cornerRadius="15dp" />

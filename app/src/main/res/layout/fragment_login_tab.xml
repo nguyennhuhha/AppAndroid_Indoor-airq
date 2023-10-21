@@ -50,8 +50,9 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:text="Log in"
-                android:textColor="@color/black"
+                android:textColor="@color/dark_greenlv1"
                 android:textSize="22sp"
+                android:fontFamily="@font/robotobold"
                 app:cornerRadius="10dp" />
 
             <Button
@@ -61,37 +62,36 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
                 android:text="Back"
-                android:textColor="@color/black"
+                android:textColor="@color/dark_greenlv1"
+                android:fontFamily="@font/robotobold"
                 android:textSize="22sp"
                 app:cornerRadius="10dp" />
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:weightSum="4"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_gravity="center">
 
                 <TextView
                     android:id="@+id/forgot_password"
-                    android:layout_width="124dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:text="Forgot password?"
-                    android:textColor="@color/green"
+                    android:text="Forgot password? "
+                    android:textColor="@color/greenlv3"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/robotomedium" />
 
                 <TextView
                     android:id="@+id/reset_password"
-                    android:layout_width="151dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
                     android:text="Reset password"
-                    android:textColor="@color/black"
+                    android:textColor="@color/dark_greenlv1"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/robotomedium" />
 
 
             </LinearLayout>

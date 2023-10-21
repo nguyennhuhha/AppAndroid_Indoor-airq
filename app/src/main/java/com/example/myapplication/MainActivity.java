@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 //    private TabLayout tabLayout;
 //    private ViewPager2 viewPager2;
 //    private ViewPagerAdapter adapter;
-    //khanhhien
+    //htkh
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

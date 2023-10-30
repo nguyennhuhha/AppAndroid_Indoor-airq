@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class SignupTabFragment extends Fragment {
     private Button back;
@@ -19,6 +20,10 @@ public class SignupTabFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_signup_tab, container, false);
         Button returnButton = view.findViewById(R.id.signup_back);
         Button signup = view.findViewById(R.id.signup_button);
+        EditText username_et = view.findViewById(R.id.signup_username);
+        EditText email_et = view.findViewById(R.id.signup_email);
+        EditText pass_et = view.findViewById(R.id.signup_password);
+        EditText confirm_et = view.findViewById(R.id.signup_confirm);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

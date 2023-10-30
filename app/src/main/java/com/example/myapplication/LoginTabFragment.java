@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 
@@ -14,16 +15,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.myapplication.RestAPI.APIClient;
+import com.example.myapplication.RestAPI.APIInterface;
+import com.example.myapplication.RestAPI.tokenResponse;
+import com.google.gson.Gson;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginTabFragment extends Fragment {
+     EditText name, pass;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login_tab, container, false);
         Button returnButton = view.findViewById(R.id.login_back);
+        Button login = view.findViewById(R.id.login_button);
+        name= view.findViewById(R.id.login_username);
+        pass = view.findViewById(R.id.login_password);
         TextView reset = view.findViewById(R.id.reset_password);
+
         reset.setPaintFlags(reset.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         //quay về trang chính
         returnButton.setOnClickListener(new View.OnClickListener() {
@@ -31,6 +49,20 @@ public class LoginTabFragment extends Fragment {
             public void onClick(View v) {
                 // Thực hiện các thao tác cần thiết để quay trở lại activity chính
                 getActivity().onBackPressed();
+            }
+        });
+        //login
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getActivity(), LoadingActivity.class);
+                String username=name.getText().toString();
+                String password = pass.getText().toString();
+                //truyền tham số
+                it.putExtra("name", username);
+                it.putExtra("pass", password);
+                startActivity(it);
+
             }
         });
         //reset passsword
@@ -48,4 +80,5 @@ public class LoginTabFragment extends Fragment {
         reset.setMovementMethod(LinkMovementMethod.getInstance());
         return view;
     }
+
 }

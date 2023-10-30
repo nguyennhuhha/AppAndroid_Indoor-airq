@@ -24,5 +24,10 @@
         android:layout_centerHorizontal="true"
         android:indeterminateTintMode="src_atop"
         android:indeterminateTint="@color/black"/>
+    <WebView
+        android:id="@+id/web_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
 </RelativeLayout>

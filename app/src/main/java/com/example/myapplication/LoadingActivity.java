@@ -60,7 +60,7 @@ public class LoadingActivity extends AppCompatActivity {
                 }
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Toast.makeText(LoadingActivity.this, "System KH", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoadingActivity.this, "System error", Toast.LENGTH_SHORT).show();
                     Log.e("NetworkError", "Error: " + t.getMessage());
                 }
             });

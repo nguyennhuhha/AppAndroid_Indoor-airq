@@ -39,7 +39,8 @@ import retrofit2.Response;
 public class LoadingActivity extends AppCompatActivity {
     private WebView webView;
     private ImageView img;
-
+    boolean isLoggedIn = false;
+    public String token;
     @Override
     //quay trở về trang trước
     public void onBackPressed() {
@@ -100,10 +101,15 @@ public class LoadingActivity extends AppCompatActivity {
                     view.evaluateJavascript(pwdScript, null);
                     view.evaluateJavascript(rePwdScript, null);
                     view.evaluateJavascript("document.getElementById('kc-register-form').submit();", null);
-                    CallLoginService(usr, pwd);
+
+                    if (!isLoggedIn) {
+                        // Thực hiện các hành động để đăng nhập
+                        CallLoginService(usr, pwd);
+                        // Đánh dấu rằng đã đăng nhập thành công
+                        isLoggedIn = true;
+                    }
                 }
             });
-
         }
     }
     private void CallLoginService(String name, String pass){
@@ -122,12 +128,14 @@ public class LoadingActivity extends AppCompatActivity {
                             String ResponseJson = response.body().string();
                             Gson objGson = new Gson();
                             tokenResponse objResp=objGson.fromJson(ResponseJson, tokenResponse.class);
-                            Toast.makeText(LoadingActivity.this, objResp.getAccess_token(), Toast.LENGTH_SHORT).show();
+                            token = objResp.getAccess_token();
+                            Toast.makeText(LoadingActivity.this, token, Toast.LENGTH_SHORT).show();
                             Toast.makeText(LoadingActivity.this, "Token success", Toast.LENGTH_SHORT).show();
                             TextView text = findViewById(R.id.text_wait);
                             text.setText("Success");
                             progressBar.setVisibility(View.GONE);
-                        } catch (Exception e){
+                        }
+                        catch (Exception e){
                             e.printStackTrace();
                             Toast.makeText(LoadingActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                         }

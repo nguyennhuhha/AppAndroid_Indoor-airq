@@ -58,7 +58,9 @@ public class LoginTabFragment extends Fragment {
                 Intent it = new Intent(getActivity(), LoadingActivity.class);
                 String username=name.getText().toString();
                 String password = pass.getText().toString();
+                int data=1;
                 //truyền tham số
+                it.putExtra("fragment", data);
                 it.putExtra("name", username);
                 it.putExtra("pass", password);
                 startActivity(it);

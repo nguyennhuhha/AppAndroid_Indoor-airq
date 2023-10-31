@@ -35,6 +35,12 @@ public class SignupTabFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(getActivity(), LoadingActivity.class);
+                int data=2;
+                it.putExtra("fragment", data);
+                it.putExtra("signup_usr", username_et.getText().toString());
+                it.putExtra("signup_email", email_et.getText().toString());
+                it.putExtra("signup_pass", pass_et.getText().toString());
+                it.putExtra("signup_cfmpass", confirm_et.getText().toString());
                 startActivity(it);
 
             }

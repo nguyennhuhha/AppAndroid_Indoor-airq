@@ -101,12 +101,7 @@ public class LoadingActivity extends AppCompatActivity {
                     view.evaluateJavascript(pwdScript, null);
                     view.evaluateJavascript(rePwdScript, null);
                     view.evaluateJavascript("document.getElementById('kc-register-form').submit();", null);
-                    if (isLoggedIn==false) {
-                        // Thực hiện các hành động để đăng nhập
-                        CallLoginService(usr, pwd);
-                        // Đánh dấu rằng đã đăng nhập thành công
-                        isLoggedIn = true;
-                    }
+                    CallLoginService(usr, pwd);
                 }
             });
         }

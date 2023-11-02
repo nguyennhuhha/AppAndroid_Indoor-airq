@@ -70,12 +70,14 @@ public class LoadingActivity extends AppCompatActivity {
             String received_name = intent.getStringExtra("name");
             String received_pass = intent.getStringExtra("pass");
             CallLoginService(received_name, received_pass);
+            img.setVisibility(View.VISIBLE);
         }
         else{//sign up
             String usr = intent.getStringExtra("signup_usr");
             String email = intent.getStringExtra("signup_email");
             String pwd = intent.getStringExtra("signup_pass");
             String rePwd=intent.getStringExtra("signup_cfmpass");
+            img.setVisibility(View.GONE);
 
             //String url ="https://uiot.ixxc.dev/auth/realms/master/protocol/openid-connect/auth?client_id=openremote&redirect_uri=https%3A%2F%2Fuiot.ixxc.dev%2Fmanager%2F&state=ec4fb068-fcb9-4247-870f-caceaf59bc0f&response_mode=fragment&response_type=code&scope=openid&nonce=e2762ea1-2f4f-4343-9738-ffa814e3274a/";
             webView.getSettings().setJavaScriptEnabled(true);

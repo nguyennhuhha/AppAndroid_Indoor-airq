@@ -76,18 +76,20 @@
                android:text="Sign up"
                android:textColor="@color/black"
                android:textSize="22sp"
-               app:cornerRadius="10dp" />
+               app:cornerRadius="10dp"
+               android:fontFamily="@font/robotobold"/>
 
            <Button
-           android:id="@+id/signup_back"
-           android:layout_width="260dp"
-           android:layout_height="50dp"
-           android:layout_gravity="center"
-           android:layout_marginTop="15dp"
-           android:text="Back"
-           android:textColor="@color/black"
-           android:textSize="22sp"
-           app:cornerRadius="10dp" />
+               android:id="@+id/signup_back"
+               android:layout_width="260dp"
+               android:layout_height="50dp"
+               android:layout_gravity="center"
+               android:layout_marginTop="15dp"
+               android:text="Back"
+               android:textColor="@color/black"
+               android:textSize="22sp"
+               app:cornerRadius="10dp"
+               android:fontFamily="@font/robotobold"/>
 
 
        </LinearLayout>

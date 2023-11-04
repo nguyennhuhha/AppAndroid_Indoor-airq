@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomePage">
+
+    <TextView
+        android:id="@+id/txtwelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome"
+        android:layout_centerHorizontal="true"
+        android:textSize="34dp"
+        android:layout_above="@+id/txtemail"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtemail"
+        android:text="Email"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textSize="18dp"/>
+
+    <Button
+        android:id="@+id/logout_btn"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/lightgreen"
+        android:fontFamily="@font/robotobold"
+        android:text="Log out"
+        android:textColor="@color/dark_greenlv1"
+        android:textSize="24sp"
+        app:cornerRadius="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"/>
+</RelativeLayout>

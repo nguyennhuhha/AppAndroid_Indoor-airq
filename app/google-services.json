@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "749500885536",
+    "project_id": "mob-dev-iot",
+    "storage_bucket": "mob-dev-iot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749500885536:android:e356c82d66e11a762fea45",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749500885536-dtr9et6ds1njlnia7u013tgkft8unumj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRgJSziqiZe8Aaz7fNdiBPdz0Qa8Lj7ew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749500885536-dtr9et6ds1njlnia7u013tgkft8unumj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,9 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:paddingLeft="40dp"
-    android:paddingRight="40dp"
     android:background="@drawable/mainbg">
+
+    <ImageButton
+        android:id="@+id/btn_changelang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/my_light_primary"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/language_icon" />
 
     <TextView
         android:id="@+id/welcometext"
@@ -21,6 +29,8 @@
         android:fontFamily="@font/robotomedium"/>
 
     <Button
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:id="@+id/signin_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,12 +39,14 @@
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/robotobold"
-        android:text="Log in"
+        android:text="@string/login"
         android:textColor="@color/dark_greenlv1"
         android:textSize="24sp"
         app:cornerRadius="15dp" />
 
     <Button
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:id="@+id/signup_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,12 +55,14 @@
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/robotobold"
-        android:text="Sign up"
+        android:text="@string/signup"
         android:textColor="@color/dark_greenlv1"
         android:textSize="24sp"
         app:cornerRadius="15dp" />
 
     <Button
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:id="@+id/signinwgg_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,7 +71,7 @@
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/robotobold"
-        android:text="Continue with Google"
+        android:text="@string/continue_gg"
         android:textColor="@color/dark_greenlv1"
         android:drawableLeft="@drawable/icon_google"
         android:drawablePadding="0dp"
@@ -72,7 +86,7 @@
         android:layout_marginBottom="70dp"
         android:layout_alignParentBottom="true"
         android:fontFamily="@font/robotomedium"
-        android:text="Reset your password?"
+        android:text="@string/reset_pass"
         android:textColor="@color/white"
         android:textSize="20sp" />
 </RelativeLayout>

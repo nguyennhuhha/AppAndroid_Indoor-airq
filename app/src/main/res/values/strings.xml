@@ -1,5 +1,17 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="language">Language</string>
     <string name="welcome">Welcome</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="email">email</string>
+    <string name="confirm_pass">confirm password</string>
+    <string name="login">Log in</string>
+    <string name="signup">Sign up</string>
+    <string name="continue_gg">Continue with Google</string>
+    <string name="back">Back</string>
+    <string name="forgot_pass">Forgot password? </string>
+    <string name="reset_pass">Reset password</string>
+    <string name="wait_loading">Wait a minute...</string>
 </resources>

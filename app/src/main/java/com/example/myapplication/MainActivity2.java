@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,8 +24,17 @@ public class MainActivity2 extends AppCompatActivity {
         tabLayout=findViewById(R.id.tab_layout);
         viewPager2=findViewById(R.id.view_pager);
 
-        tabLayout.addTab(tabLayout.newTab().setText("Login"));
-        tabLayout.addTab(tabLayout.newTab().setText("Signup"));
+        Configuration config = getResources().getConfiguration();
+        String currentLanguage = config.locale.getLanguage();
+
+        if (currentLanguage=="en"){
+            tabLayout.addTab(tabLayout.newTab().setText("Login"));
+            tabLayout.addTab(tabLayout.newTab().setText("Signup"));
+        }
+        else{
+            tabLayout.addTab(tabLayout.newTab().setText("Đăng nhập"));
+            tabLayout.addTab(tabLayout.newTab().setText("Đăng kí"));
+        }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         adapter = new ViewPagerAdapter(fragmentManager,getLifecycle());

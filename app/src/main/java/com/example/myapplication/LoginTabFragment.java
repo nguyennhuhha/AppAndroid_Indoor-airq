@@ -68,7 +68,7 @@ public class LoginTabFragment extends Fragment {
             }
         });
         //reset passsword
-        String text = "Reset password";
+        String text = reset.getText().toString();
         SpannableString ss = new SpannableString(text);
         ClickableSpan c1 = new ClickableSpan() {
             @Override

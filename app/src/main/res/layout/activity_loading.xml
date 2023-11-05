@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Wait a minute..."
+        android:text="@string/wait_loading"
         android:textAlignment="center"
         android:textSize="40sp"
         android:textColor="@color/white"/>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="welcome">Xin chào</string>
+    <string name="username">tên đăng nhập</string>
+    <string name="password">mật khẩu</string>
+    <string name="email">email</string>
+    <string name="confirm_pass">xác nhận mật khẩu</string>
+    <string name="login">Đăng nhập</string>
+    <string name="signup">Đăng kí</string>
+    <string name="continue_gg">Tiếp tục với Google</string>
+    <string name="back">Quay lại</string>
+    <string name="forgot_pass">Quên mật khẩu? </string>
+    <string name="reset_pass">Đổi mật khẩu</string>
+    <string name="wait_loading">Vui lòng chờ...</string>
+</resources>

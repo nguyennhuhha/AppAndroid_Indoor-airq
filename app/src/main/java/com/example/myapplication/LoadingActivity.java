@@ -90,7 +90,7 @@ public class LoadingActivity extends AppCompatActivity {
             webView.getSettings().setSaveFormData(false);
 
             String baseurl ="https://uiot.ixxc.dev";
-            webView.setWebViewClient(new WebViewClient());
+            //webView.setWebViewClient(new WebViewClient());
             webView.setWebViewClient(new WebViewClient() {
                 @Override
                 public void onPageFinished(WebView view, String url) {

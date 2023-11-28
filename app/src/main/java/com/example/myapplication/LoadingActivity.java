@@ -20,8 +20,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.Model.User;
 import com.example.myapplication.RestAPI.APIClient;
 import com.example.myapplication.RestAPI.APIInterface;
+import com.example.myapplication.RestAPI.APIManager;
 import com.example.myapplication.RestAPI.tokenResponse;
 import com.google.gson.Gson;
 
@@ -42,6 +44,9 @@ public class LoadingActivity extends AppCompatActivity {
     private WebView webView;
     private ImageView img;
     public String token;
+    private static User me = new User();
+
+
     @Override
     //quay trở về trang trước
     public void onBackPressed() {
@@ -71,6 +76,7 @@ public class LoadingActivity extends AppCompatActivity {
             String received_pass = intent.getStringExtra("pass");
             CallLoginService(received_name, received_pass);
             img.setVisibility(View.VISIBLE);
+            APIManager.getUserInfo();
         }
         else{//sign up
             String usr = intent.getStringExtra("signup_usr");
@@ -158,6 +164,7 @@ public class LoadingActivity extends AppCompatActivity {
                             TextView text = findViewById(R.id.text_wait);
                             text.setText("Success");
                             progressBar.setVisibility(View.GONE);
+                            Toast.makeText(LoadingActivity.this,User.getMe().username, Toast.LENGTH_SHORT).show();
                         }
                         catch (Exception e){
                             e.printStackTrace();
@@ -182,6 +189,7 @@ public class LoadingActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(LoadingActivity.this, "System error", Toast.LENGTH_SHORT).show();
         }
+
     }
     private void CallSignUpService(String name, String pass){
         ProgressBar progressBar = findViewById(R.id.progress);
@@ -227,5 +235,4 @@ public class LoadingActivity extends AppCompatActivity {
             Toast.makeText(LoadingActivity.this, "System error", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

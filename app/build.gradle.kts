@@ -50,5 +50,20 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.3.0")
     implementation("com.squareup.okhttp3:logging-interceptor:3.4.1")
     implementation ("org.jsoup:jsoup:1.13.1")
+    implementation ("com.facebook.shimmer:shimmer:0.5.0")
+
+//    // Mapbox
+//    implementation ("com.mapbox.maps:android:10.16.2") {
+//        exclude(group = "org.jetbrains.kotlin")
+//    }
+//    implementation ("com.mapbox.plugin:maps-lifecycle:10.13.0-beta.1") {
+//        exclude(group = "org.jetbrains.kotlin")
+//    }
+//    implementation ("com.mapbox.plugin:maps-scalebar:10.13.0-beta.1") {
+//        exclude(group = "org.jetbrains.kotlin")
+//    }
+
+    // Animated Bottom Bar
+    implementation ("nl.joery.animatedbottombar:library:1.1.0")
 
 }

@@ -14,4 +14,30 @@
     <string name="forgot_pass">Forgot password? </string>
     <string name="reset_pass">Reset password</string>
     <string name="wait_loading">Wait a minute...</string>
+    <string name="success">Success</string>
+    <string name="resetpw_ment">Enter your account\'s username and email to reset your password</string>
+    <string name="newpassword">new password</string>
+    <string name="sunset">Sun set</string>
+    <string name="sunrise">Sun rise</string>
+    <string name="uv_index">UV Index</string>
+    <string name="humidity">Humidity</string>
+    <string name="_0">0</string>
+    <string name="low">Low</string>
+    <string name="user_image">User Image</string>
+    <string name="hi">Hi,</string>
+    <string name="weather_image">Weather Image</string>
+    <string name="sample_mostly_sunny">Mostly sunny</string>
+    <string name="sample_c">- - °C</string>
+    <string name="sample_degrees">- - ° / - - °</string>
+    <string name="sample_percent">%</string>
+    <string name="home">Home</string>
+    <string name="maps">Map</string>
+    <string name="admin">Admin</string>
+    <string name="celsius">°C</string>
+    <string name="mm">mm</string>
+    <string name="rainfall">Rainfall</string>
+    <string name="wind_speed">Wind speed</string>
+    <string name="km_h">km/h</string>
+
+
 </resources>

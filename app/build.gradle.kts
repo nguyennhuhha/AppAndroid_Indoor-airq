@@ -56,4 +56,5 @@ dependencies {
     implementation ("nl.joery.animatedbottombar:library:1.1.0")
     // Mapbox
     //implementation("com.mapbox.maps:android:11.0.0")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }

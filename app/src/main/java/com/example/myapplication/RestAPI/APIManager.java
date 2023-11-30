@@ -2,6 +2,7 @@ package com.example.myapplication.RestAPI;
 
 import com.example.myapplication.LoadingActivity;
 import com.example.myapplication.Model.Device;
+import com.example.myapplication.Model.Map;
 import com.example.myapplication.Model.User;
 
 import java.io.IOException;
@@ -48,5 +49,24 @@ public class APIManager {
             }
         });
 
+    }
+    public static void getMap() {
+        Call<Map> call = userAI.getMap();
+        call.enqueue(new Callback<Map>() {
+            @Override
+            public void onResponse(Call<Map> call, Response<Map> response) {
+                Log.d("API CALL", response.code()+"");
+                Map.setMapObj(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Map> call, Throwable t) {
+                Log.d("API CALL", t.getMessage().toString());
+            }
+        });
+//        try {
+//            Response<Map> response = call.execute();
+//            if (response.isSuccessful()) { Map.setMapObj(response.body()); }
+//        } catch (IOException e) { e.printStackTrace(); }
     }
 }

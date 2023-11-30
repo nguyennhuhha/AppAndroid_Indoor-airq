@@ -1,6 +1,7 @@
 package com.example.myapplication.RestAPI;
 
 import com.example.myapplication.Model.Device;
+import com.example.myapplication.Model.Map;
 import com.example.myapplication.Model.User;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -36,5 +37,7 @@ public interface APIInterface {
     Call<User> getUserInfo();
     @GET("api/master/asset/{assetID}")
     Call<Device> getDevice(@Path("assetID") String deviceID);
-
+    // Get Maps data
+    @GET("api/master/map")
+    Call<Map> getMap();
 }

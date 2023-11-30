@@ -2,8 +2,8 @@ package com.example.myapplication.Model;
 
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
-import com.mapbox.geojson.Point;
-import com.mapbox.maps.CoordinateBounds;
+//import com.mapbox.geojson.Point;
+//import com.mapbox.maps.CoordinateBounds;
 
 import java.util.ArrayList;
 
@@ -11,15 +11,6 @@ public class Map {
     public static boolean isReady = false;
 
     public static Map MapObj = null;
-
-    public static Map getMapObj() {
-        return MapObj;
-    }
-
-    public static void setMapObj(Map mapObj) {
-        MapObj = mapObj;
-        isReady = true;
-    }
 
     @SerializedName("options")
     public JsonObject options;
@@ -34,10 +25,26 @@ public class Map {
     @SerializedName("layers")
     public ArrayList<JsonObject> layers;
 
-    public Point getCenter() {
-        float lat = options.get("default").getAsJsonObject().get("center").getAsJsonArray().get(1).getAsFloat();
-        float lng = options.get("default").getAsJsonObject().get("center").getAsJsonArray().get(0).getAsFloat();
-        return Point.fromLngLat(lng, lat);
+//    public Point getCenter() {
+//        float lat = options.get("default").getAsJsonObject().get("center").getAsJsonArray().get(1).getAsFloat();
+//        float lng = options.get("default").getAsJsonObject().get("center").getAsJsonArray().get(0).getAsFloat();
+//        return Point.fromLngLat(lng, lat);
+//    }
+    public static Map getMapObj() {
+    return MapObj;
+}
+
+    public static void setMapObj(Map mapObj) {
+        MapObj = mapObj;
+        isReady = true;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
     public double getZoom() {
@@ -52,16 +59,16 @@ public class Map {
         return options.get("default").getAsJsonObject().get("maxZoom").getAsInt();
     }
 
-    public CoordinateBounds getBounds() {
-        ArrayList<Float> bounds = new ArrayList<>();
-
-        for (int i = 0; i < 4; i++) {
-            bounds.add(options.get("default").getAsJsonObject().get("bounds").getAsJsonArray().get(i).getAsFloat());
-        }
-
-        return new CoordinateBounds(
-                Point.fromLngLat(bounds.get(0),bounds.get(1)),
-                Point.fromLngLat(bounds.get(2),bounds.get(3))
-        );
-    }
+//    public CoordinateBounds getBounds() {
+//        ArrayList<Float> bounds = new ArrayList<>();
+//
+//        for (int i = 0; i < 4; i++) {
+//            bounds.add(options.get("default").getAsJsonObject().get("bounds").getAsJsonArray().get(i).getAsFloat());
+//        }
+//
+//        return new CoordinateBounds(
+//                Point.fromLngLat(bounds.get(0),bounds.get(1)),
+//                Point.fromLngLat(bounds.get(2),bounds.get(3))
+//        );
+//    }
 }

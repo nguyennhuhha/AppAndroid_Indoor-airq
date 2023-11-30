@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Model.Device;
+import com.example.myapplication.Model.Map;
 import com.example.myapplication.Model.User;
 import com.example.myapplication.Model.WeatherDevice;
 import com.example.myapplication.RestAPI.APIClient;
@@ -80,7 +81,7 @@ public class LoadingActivity extends AppCompatActivity {
             APIManager.getUserInfo();
             //get details
             APIManager.getDevice();
-
+            APIManager.getMap();
 
         }
         else{//sign up
@@ -169,6 +170,8 @@ public class LoadingActivity extends AppCompatActivity {
                             TextView text = findViewById(R.id.text_wait);
                             text.setText("Success");
                             progressBar.setVisibility(View.GONE);
+                            //Log.d("Map", String.valueOf(Map.MapObj.getVersion()));
+                            //Toast.makeText(LoadingActivity.this, String.valueOf(Map.MapObj.getVersion()), Toast.LENGTH_SHORT).show();
                             Intent it = new Intent(LoadingActivity.this, HomeActivity.class);
                             startActivity(it);
                             //Toast.makeText(LoadingActivity.this,User.getMe().username, Toast.LENGTH_SHORT).show();

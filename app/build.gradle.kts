@@ -52,11 +52,8 @@ dependencies {
     implementation ("org.jsoup:jsoup:1.13.1")
     implementation ("com.facebook.shimmer:shimmer:0.5.0")
 
-    // Mapbox
-
-    implementation("com.mapbox.maps:android:11.0.0")
-
     // Animated Bottom Bar
     implementation ("nl.joery.animatedbottombar:library:1.1.0")
-
+    // Mapbox
+    //implementation("com.mapbox.maps:android:11.0.0")
 }

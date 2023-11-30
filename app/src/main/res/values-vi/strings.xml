@@ -39,4 +39,6 @@
     <string name="rainfall">Lượng mưa</string>
     <string name="wind_speed">Tốc độ gió</string>
     <string name="km_h">km/h</string>
+    <string name="mapbox_access_token">sk.eyJ1IjoicGF0dXMiLCJhIjoiY2w5NnFuaWE4MDVlMTN2cGp6MnZzcGZuYSJ9.FseUDG-zlpql4XkRhJTe5A</string>
+    <string name="device_icon">Device Icon</string>
 </resources>

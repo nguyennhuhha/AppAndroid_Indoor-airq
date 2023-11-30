@@ -10,6 +10,7 @@
     <color name="yellowlight">#FFFFF2</color>
     <color name="my_light_primary">#D7FFDC</color>
     <color name="dark_greenlv1">#1B2F2E</color>
+    <color name="bg1">#1D5632</color>
 
 
     <color name="text">#757575</color>
@@ -17,5 +18,6 @@
     <color name="lime">#00ff00</color>
     <color name="yellow">#ffff00</color>
     <color name="purple">#800080</color>
+    <color name="darker_grey">#A9a9a9</color>
 
 </resources>

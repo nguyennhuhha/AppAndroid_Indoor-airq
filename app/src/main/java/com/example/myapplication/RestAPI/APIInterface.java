@@ -1,5 +1,6 @@
 package com.example.myapplication.RestAPI;
 
+import com.example.myapplication.Model.Device;
 import com.example.myapplication.Model.User;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -33,5 +34,7 @@ public interface APIInterface {
     // Get user info
     @GET("api/master/user/user")
     Call<User> getUserInfo();
+    @GET("api/master/asset/{assetID}")
+    Call<Device> getDevice(@Path("assetID") String deviceID);
 
 }

@@ -1,17 +1,10 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Printer;
 import android.view.View;
-import android.webkit.JavascriptInterface;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -20,22 +13,20 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.Model.Device;
 import com.example.myapplication.Model.User;
+import com.example.myapplication.Model.WeatherDevice;
 import com.example.myapplication.RestAPI.APIClient;
 import com.example.myapplication.RestAPI.APIInterface;
 import com.example.myapplication.RestAPI.APIManager;
 import com.example.myapplication.RestAPI.tokenResponse;
 import com.google.gson.Gson;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import okhttp3.ResponseBody;
-import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,7 +35,8 @@ public class LoadingActivity extends AppCompatActivity {
     private WebView webView;
     private ImageView img;
     public String token;
-    private static User me = new User();
+
+    private WeatherDevice defaultDevice;
 
 
     @Override
@@ -59,6 +51,14 @@ public class LoadingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_loading);
         webView = findViewById(R.id.web_login);
         img = findViewById(R.id.back_btn);
+        TextView text = findViewById(R.id.text_wait);
+        text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(LoadingActivity.this, HomeActivity.class);
+                startActivity(it);
+            }
+        });
         img.setOnClickListener(new View.OnClickListener() {//quay về trang trước
             @Override
             public void onClick(View v) {
@@ -76,7 +76,12 @@ public class LoadingActivity extends AppCompatActivity {
             String received_pass = intent.getStringExtra("pass");
             CallLoginService(received_name, received_pass);
             img.setVisibility(View.VISIBLE);
+            //get username
             APIManager.getUserInfo();
+            //get details
+            APIManager.getDevice();
+
+
         }
         else{//sign up
             String usr = intent.getStringExtra("signup_usr");
@@ -160,16 +165,25 @@ public class LoadingActivity extends AppCompatActivity {
                             tokenResponse objResp=objGson.fromJson(ResponseJson, tokenResponse.class);
                             token = objResp.getAccess_token();
                             Toast.makeText(LoadingActivity.this, token, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(LoadingActivity.this, "Token success", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoadingActivity.this, "Token success", Toast.LENGTH_SHORT).show();
                             TextView text = findViewById(R.id.text_wait);
                             text.setText("Success");
                             progressBar.setVisibility(View.GONE);
-                            Toast.makeText(LoadingActivity.this,User.getMe().username, Toast.LENGTH_SHORT).show();
+                            Intent it = new Intent(LoadingActivity.this, HomeActivity.class);
+                            startActivity(it);
+                            //Toast.makeText(LoadingActivity.this,User.getMe().username, Toast.LENGTH_SHORT).show();
+                            //defaultDevice = new WeatherDevice(Device.getDevice());
+                            //Toast.makeText(LoadingActivity.this, defaultDevice.temperature.getValueString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoadingActivity.this, defaultDevice.humidity.getValueString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoadingActivity.this, defaultDevice.rainfall.getValueString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoadingActivity.this, defaultDevice.windSpeed.getValueString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoadingActivity.this, String.join("", defaultDevice.temperature.getValueString(),getResources().getString(R.string.celsius)), Toast.LENGTH_SHORT).show();
                         }
                         catch (Exception e){
                             e.printStackTrace();
                             Toast.makeText(LoadingActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                         }
+
                     }
                     else{
                         Toast.makeText(LoadingActivity.this, "Invalid, Try again", Toast.LENGTH_SHORT).show();

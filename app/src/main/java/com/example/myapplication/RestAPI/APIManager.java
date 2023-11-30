@@ -1,6 +1,7 @@
 package com.example.myapplication.RestAPI;
 
 import com.example.myapplication.LoadingActivity;
+import com.example.myapplication.Model.Device;
 import com.example.myapplication.Model.User;
 
 import java.io.IOException;
@@ -23,11 +24,29 @@ public class APIManager {
                 Log.d("API CALL", response.code()+"");
                 User.setMe(response.body());
             }
-
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Log.d("API CALL", t.getMessage().toString());
             }
         });
+
+
+
+    }
+    public static void getDevice(){
+        Call<Device> call = userAI.getDevice("5zI6XqkQVSfdgOrZ1MyWEf");
+        call.enqueue(new Callback<Device>() {
+            @Override
+            public void onResponse(Call<Device> call, Response<Device> response) {
+                Log.d("API CALL", response.code()+"");
+                Device.setDevice(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Device> call, Throwable t) {
+                Log.d("API CALL", t.getMessage().toString());
+            }
+        });
+
     }
 }

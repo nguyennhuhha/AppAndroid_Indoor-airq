@@ -17,51 +17,50 @@ public class APIManager {
     private static final APIClient apiClient = new APIClient();
     private static final APIInterface userAI = apiClient.getClient().create(APIInterface.class);
 
+    //get user
     public static void getUserInfo() {
         Call<User> call = userAI.getUserInfo();
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                Log.d("API CALL", response.code()+"");
+                Log.d("API USER", response.code()+"");
                 User.setMe(response.body());
             }
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Log.d("API CALL", t.getMessage().toString());
+                Log.d("API USER", t.getMessage().toString());
             }
         });
-
-
-
     }
+
+    //get temp rain hum
     public static void getDevice(){
         Call<Device> call = userAI.getDevice("5zI6XqkQVSfdgOrZ1MyWEf");
         call.enqueue(new Callback<Device>() {
             @Override
             public void onResponse(Call<Device> call, Response<Device> response) {
-                Log.d("API CALL", response.code()+"");
+                Log.d("API DEVICE", response.code()+"");
                 Device.setDevice(response.body());
             }
-
             @Override
             public void onFailure(Call<Device> call, Throwable t) {
-                Log.d("API CALL", t.getMessage().toString());
+                Log.d("API DEVICE", t.getMessage().toString());
             }
         });
-
     }
+
+    //get map
     public static void getMap() {
         Call<Map> call = userAI.getMap();
         call.enqueue(new Callback<Map>() {
             @Override
             public void onResponse(Call<Map> call, Response<Map> response) {
-                Log.d("API CALL", response.code()+"");
+                Log.d("API MAP", response.code()+"");
                 Map.setMapObj(response.body());
             }
-
             @Override
             public void onFailure(Call<Map> call, Throwable t) {
-                Log.d("API CALL", t.getMessage().toString());
+                Log.d("API MAP", t.getMessage().toString());
             }
         });
 //        try {

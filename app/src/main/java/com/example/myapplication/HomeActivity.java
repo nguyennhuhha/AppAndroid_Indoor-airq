@@ -43,6 +43,7 @@ public class HomeActivity extends AppCompatActivity {
 //        });
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         usr_name = User.getMe().username;
         defaultDevice = new WeatherDevice(Device.getDevice());
         temp = defaultDevice.temperature.getValueString();
@@ -65,11 +66,11 @@ public class HomeActivity extends AppCompatActivity {
         navbar.selectTabAt(0, false);
         //senDatatoFragmentHome();
     }
-    private void senDatatoFragmentHome(){
-        ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.main_frame, homeFrag);
-        ft.commit();
-    }
+//    private void senDatatoFragmentHome(){
+//        ft = getSupportFragmentManager().beginTransaction();
+//        ft.replace(R.id.main_frame, homeFrag);
+//        ft.commit();
+//    }
     private void InitVars() {
         selectedIndex = 0;
 
@@ -93,7 +94,6 @@ public class HomeActivity extends AppCompatActivity {
                     case 0:
                         fm.beginTransaction().hide(fragment).commit();
                         fragment = homeFrag;
-
                         break;
                     case 1:
                         fm.beginTransaction().hide(fragment).commit();

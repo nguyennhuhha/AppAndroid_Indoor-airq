@@ -64,7 +64,8 @@ public class HomeFragment extends Fragment {
 
     public void showBasicInfo(){
         tv_username=mView.findViewById(R.id.tv_username);
-        tv_username.setText(parentActivity.getUsr_name());
+        //tv_username.setText(parentActivity.getUsr_name());
+        tv_username.setText(User.getMe().username);
         tv_username.setVisibility(View.VISIBLE);
         pb_username=mView.findViewById(R.id.pb_username);
         pb_username.setVisibility(View.GONE);
@@ -73,18 +74,23 @@ public class HomeFragment extends Fragment {
         SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
         tv_dow.setText(sdf.format(new Date()));
 
+        defaultDevice = new WeatherDevice(Device.getDevice());
         TextView tv_temper = mView.findViewById(R.id.tv_temper);
-        String temper = String.join("", parentActivity.getTemp(), getResources().getString(R.string.celsius));
+        //String temper = String.join("", parentActivity.getTemp(), getResources().getString(R.string.celsius));
+        String temper = String.join("",defaultDevice.temperature.getValueString(), getResources().getString(R.string.celsius));
         tv_temper.setText(temper);
 
         TextView tv_wind = mView.findViewById(R.id.tv_windspeed);
-        tv_wind.setText(parentActivity.getWind());
+        //tv_wind.setText(parentActivity.getWind());
+        tv_wind.setText(defaultDevice.windSpeed.getValueString());
 
         TextView tv_rain = mView.findViewById(R.id.tv_rainfall);
-        tv_rain.setText(parentActivity.getRain());
+        //tv_rain.setText(parentActivity.getRain());
+        tv_rain.setText(defaultDevice.rainfall.getValueString());
 
         TextView tv_hum = mView.findViewById(R.id.tv_humidity);
-        tv_hum.setText(parentActivity.getHum());
+        //tv_hum.setText(parentActivity.getHum());
+        tv_hum.setText(defaultDevice.humidity.getValueString());
     }
 
 }

@@ -68,6 +68,14 @@ public class LoadingActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
+        //get userinfo
+        APIManager.getUserInfo();
+
+        //get details temp rain humid
+        APIManager.getDevice();
+
+        //get map
+        APIManager.getMap();
 
         Intent intent = getIntent();
         //1: login, 2: signup
@@ -77,12 +85,6 @@ public class LoadingActivity extends AppCompatActivity {
             String received_pass = intent.getStringExtra("pass");
             CallLoginService(received_name, received_pass);
             img.setVisibility(View.VISIBLE);
-            //get username
-            APIManager.getUserInfo();
-            //get details
-            APIManager.getDevice();
-            APIManager.getMap();
-
         }
         else{//sign up
             String usr = intent.getStringExtra("signup_usr");
@@ -174,19 +176,14 @@ public class LoadingActivity extends AppCompatActivity {
                             //Toast.makeText(LoadingActivity.this, String.valueOf(Map.MapObj.getVersion()), Toast.LENGTH_SHORT).show();
                             Intent it = new Intent(LoadingActivity.this, HomeActivity.class);
                             startActivity(it);
-                            //Toast.makeText(LoadingActivity.this,User.getMe().username, Toast.LENGTH_SHORT).show();
-                            //defaultDevice = new WeatherDevice(Device.getDevice());
-                            //Toast.makeText(LoadingActivity.this, defaultDevice.temperature.getValueString(), Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(LoadingActivity.this, defaultDevice.humidity.getValueString(), Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(LoadingActivity.this, defaultDevice.rainfall.getValueString(), Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(LoadingActivity.this, defaultDevice.windSpeed.getValueString(), Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(LoadingActivity.this, String.join("", defaultDevice.temperature.getValueString(),getResources().getString(R.string.celsius)), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(LoadingActivity.this,User.getMe().username, Toast.LENGTH_SHORT).show();
+//                            defaultDevice = new WeatherDevice(Device.getDevice());
+//                            Toast.makeText(LoadingActivity.this, defaultDevice.temperature.getValueString(), Toast.LENGTH_SHORT).show();
                         }
                         catch (Exception e){
                             e.printStackTrace();
                             Toast.makeText(LoadingActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                         }
-
                     }
                     else{
                         Toast.makeText(LoadingActivity.this, "Invalid, Try again", Toast.LENGTH_SHORT).show();

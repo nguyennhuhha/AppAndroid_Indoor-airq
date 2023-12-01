@@ -88,7 +88,6 @@ public class HomeActivity extends AppCompatActivity {
         navbar.setOnTabSelectListener(new AnimatedBottomBar.OnTabSelectListener() {
             @Override
             public void onTabSelected(int lastIndex, @Nullable AnimatedBottomBar.Tab lastTab, int newIndex, @NonNull AnimatedBottomBar.Tab newTab) {
-                //if (fragment == devicesFrag) devicesFrag.changeSelectedDevice(-1, "");
 
                 switch (newIndex) {
                     case 0:

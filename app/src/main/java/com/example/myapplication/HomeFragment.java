@@ -45,6 +45,7 @@ public class HomeFragment extends Fragment {
     User me;
     private View mView;
     String user;
+
     public HomeFragment() {
 
     }
@@ -60,6 +61,11 @@ public class HomeFragment extends Fragment {
         parentActivity = (HomeActivity) getActivity();
         showBasicInfo();
         return mView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     public void showBasicInfo(){

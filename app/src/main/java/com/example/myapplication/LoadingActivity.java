@@ -36,8 +36,10 @@ public class LoadingActivity extends AppCompatActivity {
     private WebView webView;
     private ImageView img;
     public String token;
+    public String api;
 
     private WeatherDevice defaultDevice;
+    private AsyncTasks async;
 
 
     @Override
@@ -50,16 +52,12 @@ public class LoadingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
+        async = new AsyncTasks(LoadingActivity.this);
+        async.execute();
+
         webView = findViewById(R.id.web_login);
         img = findViewById(R.id.back_btn);
         TextView text = findViewById(R.id.text_wait);
-        text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(LoadingActivity.this, HomeActivity.class);
-                startActivity(it);
-            }
-        });
         img.setOnClickListener(new View.OnClickListener() {//quay về trang trước
             @Override
             public void onClick(View v) {
@@ -68,14 +66,6 @@ public class LoadingActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
-        //get userinfo
-        APIManager.getUserInfo();
-
-        //get details temp rain humid
-        APIManager.getDevice();
-
-        //get map
-        APIManager.getMap();
 
         Intent intent = getIntent();
         //1: login, 2: signup
@@ -172,13 +162,13 @@ public class LoadingActivity extends AppCompatActivity {
                             TextView text = findViewById(R.id.text_wait);
                             text.setText("Success");
                             progressBar.setVisibility(View.GONE);
-                            //Log.d("Map", String.valueOf(Map.MapObj.getVersion()));
-                            //Toast.makeText(LoadingActivity.this, String.valueOf(Map.MapObj.getVersion()), Toast.LENGTH_SHORT).show();
                             Intent it = new Intent(LoadingActivity.this, HomeActivity.class);
                             startActivity(it);
-//                            Toast.makeText(LoadingActivity.this,User.getMe().username, Toast.LENGTH_SHORT).show();
-//                            defaultDevice = new WeatherDevice(Device.getDevice());
-//                            Toast.makeText(LoadingActivity.this, defaultDevice.temperature.getValueString(), Toast.LENGTH_SHORT).show();
+                            //Log.d("Map", String.valueOf(Map.MapObj.getVersion()));
+                            //Toast.makeText(LoadingActivity.this, String.valueOf(Map.MapObj.getVersion()), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoadingActivity.this,User.getMe().username, Toast.LENGTH_SHORT).show();
+                            //defaultDevice = new WeatherDevice(Device.getDevice());
+                            //Toast.makeText(LoadingActivity.this, defaultDevice.temperature.getValueString(), Toast.LENGTH_SHORT).show();
                         }
                         catch (Exception e){
                             e.printStackTrace();

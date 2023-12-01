@@ -54,7 +54,14 @@ dependencies {
 
     // Animated Bottom Bar
     implementation ("nl.joery.animatedbottombar:library:1.1.0")
+
     // Mapbox
-    //implementation("com.mapbox.maps:android:11.0.0")
+    implementation ("com.google.android.gms:play-services-maps:18.1.0")
+    implementation ("com.google.android.gms:play-services-location:21.0.1")
+
+    //Chart
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    implementation("io.reactivex:rxandroid:1.2.1")
+    implementation("io.reactivex:rxjava:1.3.0")
 }

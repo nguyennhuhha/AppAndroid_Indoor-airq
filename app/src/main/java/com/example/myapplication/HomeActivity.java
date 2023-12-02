@@ -17,6 +17,7 @@ import com.example.myapplication.Model.Map;
 import com.example.myapplication.Model.User;
 import com.example.myapplication.Model.WeatherDevice;
 import com.example.myapplication.RestAPI.APIManager;
+import com.google.android.gms.maps.model.LatLng;
 
 import nl.joery.animatedbottombar.AnimatedBottomBar;
 
@@ -31,6 +32,7 @@ public class HomeActivity extends AppCompatActivity {
     private FragmentTransaction ft;
     private WeatherDevice defaultDevice;
     private Fragment fragment;
+
     int selectedIndex;
 
     @Override
@@ -134,4 +136,5 @@ public class HomeActivity extends AppCompatActivity {
     public String getWind() {
         return wind;
     }
+
 }

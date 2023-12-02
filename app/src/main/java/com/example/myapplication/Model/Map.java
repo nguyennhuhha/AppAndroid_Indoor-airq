@@ -1,5 +1,7 @@
 package com.example.myapplication.Model;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 //import com.mapbox.geojson.Point;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 public class Map {
     public static boolean isReady = false;
 
-    public static Map MapObj = null;
+    public static Map MapObj;
 
     @SerializedName("options")
     public JsonObject options;
@@ -25,11 +27,12 @@ public class Map {
     @SerializedName("layers")
     public ArrayList<JsonObject> layers;
 
-//    public Point getCenter() {
-//        float lat = options.get("default").getAsJsonObject().get("center").getAsJsonArray().get(1).getAsFloat();
-//        float lng = options.get("default").getAsJsonObject().get("center").getAsJsonArray().get(0).getAsFloat();
-//        return Point.fromLngLat(lng, lat);
-//    }
+    public LatLng getCenter() {
+        float lat = options.get("default").getAsJsonObject().get("center").getAsJsonArray().get(1).getAsFloat();
+        float lon = options.get("default").getAsJsonObject().get("center").getAsJsonArray().get(0).getAsFloat();
+        LatLng latLng = new LatLng(lat, lon);
+        return latLng;
+    }
     public static Map getMapObj() {
     return MapObj;
 }
@@ -47,28 +50,28 @@ public class Map {
         this.version = version;
     }
 
-    public double getZoom() {
-        return options.get("default").getAsJsonObject().get("zoom").getAsInt();
+    public float getZoom() {
+        return options.get("default").getAsJsonObject().get("zoom").getAsFloat();
     }
 
-    public double getMinZoom() {
-        return options.get("default").getAsJsonObject().get("minZoom").getAsInt();
+    public float getMinZoom() {
+        return options.get("default").getAsJsonObject().get("minZoom").getAsFloat();
     }
 
-    public double getMaxZoom() {
-        return options.get("default").getAsJsonObject().get("maxZoom").getAsInt();
+    public float getMaxZoom() {
+        return options.get("default").getAsJsonObject().get("maxZoom").getAsFloat();
     }
 
-//    public CoordinateBounds getBounds() {
-//        ArrayList<Float> bounds = new ArrayList<>();
-//
-//        for (int i = 0; i < 4; i++) {
-//            bounds.add(options.get("default").getAsJsonObject().get("bounds").getAsJsonArray().get(i).getAsFloat());
-//        }
-//
-//        return new CoordinateBounds(
-//                Point.fromLngLat(bounds.get(0),bounds.get(1)),
-//                Point.fromLngLat(bounds.get(2),bounds.get(3))
-//        );
-//    }
+    public LatLngBounds getBounds() {
+        ArrayList<Float> bounds = new ArrayList<>();
+
+        for (int i = 0; i < 4; i++) {
+            bounds.add(options.get("default").getAsJsonObject().get("bounds").getAsJsonArray().get(i).getAsFloat());
+        }
+
+        return new LatLngBounds(
+                new LatLng(bounds.get(0),bounds.get(1)),
+                new LatLng(bounds.get(2),bounds.get(3))
+        );
+    }
 }

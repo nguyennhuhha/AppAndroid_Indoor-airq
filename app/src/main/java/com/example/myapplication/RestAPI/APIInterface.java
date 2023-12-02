@@ -1,14 +1,16 @@
 package com.example.myapplication.RestAPI;
 
-import com.example.myapplication.Model1.Current;
 import com.example.myapplication.Model.Device;
 import com.example.myapplication.Model.Map;
 import com.example.myapplication.Model.User;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -31,12 +33,17 @@ public interface APIInterface {
     // Get user info
     @GET("api/master/user/user")
     Call<User> getUserInfo();
+
+    // Get asset
     @GET("api/master/asset/{assetID}")
     Call<Device> getDevice(@Path("assetID") String deviceID);
+
     // Get Maps data
     @GET("api/master/map")
     Call<Map> getMap();
-    // Get current
-    @GET("api/master/asset/user/current")
-    Observable<ArrayList<Current>> getCurrent();
+
+    // Get all devices
+    @Headers("Content-Type: application/json")
+    @POST("api/master/asset/query")
+    Call<List<Device>> queryDevices(@Body JsonObject body);
 }

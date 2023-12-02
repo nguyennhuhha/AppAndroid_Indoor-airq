@@ -8,13 +8,19 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.example.myapplication.Model.Device;
+import com.example.myapplication.Model.Map;
 import com.example.myapplication.Model.User;
 import com.example.myapplication.RestAPI.APIManager;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class AsyncTasks extends AsyncTask<String, Long, Void> {
     private ProgressDialog pdWaiting;
+    TextView textView;
+    public static float minzoom;
+    public static float maxzoom;
+    public static float zoom;
     private Context context;
     public AsyncTasks(Context context){
         this.context = context;
@@ -37,6 +43,16 @@ public class AsyncTasks extends AsyncTask<String, Long, Void> {
         if (Device.getDevice() == null ) {
             APIManager.getDevice();
         }
+        if (Device.getDevicesList() == null || Device.getDevicesList().size() == 0) {
+            String queryString = "{ \"realm\": { \"name\": \"master\" }}";
+            JsonParser jsonParser = new JsonParser();
+            JsonElement jsonElement = jsonParser.parse(queryString);
+            JsonObject query = jsonElement.getAsJsonObject();
+            APIManager.queryDevices(query);
+        }
+        if (Map.getMapObj() == null) {
+            APIManager.getMap();
+        }
         return null;
     }
 
@@ -48,8 +64,10 @@ public class AsyncTasks extends AsyncTask<String, Long, Void> {
     protected void onPostExecute(Void aVoid){
         super.onPostExecute(aVoid);
 
-        if (pdWaiting.isShowing()) pdWaiting.dismiss();
-        else Log.d("async", "done");
+        if (pdWaiting.isShowing()){
+            pdWaiting.dismiss();
+            Log.d("async", "done");
+        }
 
     }
 }

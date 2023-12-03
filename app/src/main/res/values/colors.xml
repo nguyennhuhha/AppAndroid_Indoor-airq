@@ -19,5 +19,7 @@
     <color name="yellow">#ffff00</color>
     <color name="purple">#800080</color>
     <color name="darker_grey">#A9a9a9</color>
+    <color name="blue">#FF00E5FF</color>
+    <color name="pink">#FFFA7272</color>
 
 </resources>

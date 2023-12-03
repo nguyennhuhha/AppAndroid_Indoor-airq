@@ -66,13 +66,8 @@ public class HomeActivity extends AppCompatActivity {
         fm.beginTransaction().add(R.id.main_frame, homeFrag, "home").commit();
         fragment = homeFrag;
         navbar.selectTabAt(0, false);
-        //senDatatoFragmentHome();
     }
-//    private void senDatatoFragmentHome(){
-//        ft = getSupportFragmentManager().beginTransaction();
-//        ft.replace(R.id.main_frame, homeFrag);
-//        ft.commit();
-//    }
+
     private void InitVars() {
         selectedIndex = 0;
 

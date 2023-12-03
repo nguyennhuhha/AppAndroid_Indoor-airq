@@ -5,9 +5,11 @@ import com.example.myapplication.Model.Device;
 import com.example.myapplication.Model.Map;
 import com.example.myapplication.Model.User;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 public class APIManager {
     public static LatLng center;
     public static float zoom, min, max;
+    public static ArrayList<Double> bounds;
     private static final APIClient apiClient = new APIClient();
     private static final APIInterface userAI = apiClient.getClient().create(APIInterface.class);
 
@@ -91,6 +94,7 @@ public class APIManager {
                 zoom = Map.getMapObj().getZoom();
                 min = Map.getMapObj().getMinZoom();
                 max = Map.getMapObj().getMaxZoom();
+                bounds=Map.getMapObj().getBounds();
             }
         } catch (IOException e) { e.printStackTrace(); }
     }

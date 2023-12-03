@@ -63,11 +63,8 @@ public class AsyncTasks extends AsyncTask<String, Long, Void> {
     @Override
     protected void onPostExecute(Void aVoid){
         super.onPostExecute(aVoid);
-
         if (pdWaiting.isShowing()){
             pdWaiting.dismiss();
-            Log.d("async", "done");
         }
-
     }
 }

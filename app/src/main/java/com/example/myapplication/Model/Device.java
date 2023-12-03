@@ -122,17 +122,9 @@ public class Device {
         }
         return null;
     }
-    public static List<String> getDeviceNames() {
-        return deviceList.stream().map(d -> d.name + "(" + d.id + ")").collect(Collectors.toList());
-    }
 
     public List<Attribute> getDeviceAttribute() {
         List<Attribute> attributeList = new ArrayList<>();
-//        for (String key : attributes.keySet()) {
-//            JsonObject o = attributes.get(key).getAsJsonObject();
-//            Attribute attribute = new Gson().fromJson(o, Attribute.class);
-//            attributeList.add(attribute);
-//        }
         for (Map.Entry<String, JsonElement> entry : attributes.entrySet()) {
             String key = entry.getKey();
             JsonElement value = entry.getValue();
@@ -175,20 +167,6 @@ public class Device {
         return attributeList;
     }
 
-    // Get device parent id
-    public String getParentId() {
-        String parentId = "";
-
-        for (String path : path) {
-            if (!path.equals(id)) {
-                parentId = path;
-                break;
-            }
-        }
-
-        return parentId;
-    }
-
     // Get device location
     public LatLng getPoint() {
         try {
@@ -213,17 +191,7 @@ public class Device {
                 return R.drawable.ic_door;
         }
 
-        return R.drawable.baseline_person_2_24;
-    }
-
-    // Get icon drawable
-    public Drawable getIconDrawable(Context context, String deviceType, int colorTint) {
-        int resId = getIconRes(deviceType);
-        Drawable icon = ResourcesCompat.getDrawable(context.getResources(), resId, null);
-        assert icon != null;
-        icon.setTint(colorTint);
-
-        return icon;
+        return R.drawable.baseline_lightbulb_24;
     }
 
     // Get icon bitmap (show on Maps)
@@ -233,7 +201,14 @@ public class Device {
         assert drawable != null;
 
         // Get pin drawable
-        Drawable pin_drawable = ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_pin_green, null);
+        Drawable pin_drawable = null;
+        if (resId == R.drawable.baseline_lightbulb_24){
+
+            pin_drawable = ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_pin_pink, null);
+        }
+        else{
+            pin_drawable = ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_pin_green, null);
+        }
         assert pin_drawable != null;
 
         // Draw icon into pin
@@ -247,11 +222,5 @@ public class Device {
 
         return BitmapDescriptorFactory.fromBitmap(pin);
     }
-    public Device getParent() {
-        if (path.size() > 1) {
-            return getDeviceById(path.get(path.size() - 2));
-        }
 
-        return null;
-    }
 }

@@ -2,42 +2,41 @@ package com.example.myapplication;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.Adapter.BottomSheetAdapter;
+import com.example.myapplication.Model.Attribute;
 import com.example.myapplication.Model.Map;
 import com.example.myapplication.Model.Device;
 import com.example.myapplication.RestAPI.APIManager;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Objects;
-
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import java.util.List;
 
 public class MapFragment extends Fragment {
     private HomeActivity parentActivity;
@@ -62,22 +61,15 @@ public class MapFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        InitViews(view);
-        InitEvents();
-        //        GPS
-        if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling   ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+        supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+
+        // GPS
+        if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
                     android.Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION}, 1);
             return;
         }
-
-        //setMapView();
         new Thread(() -> {
             while (!Map.isReady) {
                 try {
@@ -91,18 +83,6 @@ public class MapFragment extends Fragment {
 
         }).start();
     }
-    private void InitViews(View view) {
-        supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-//        bs_device = view.findViewById(R.id.bs_device);
-//        rv_attributes = view.findViewById(R.id.rv_attributes);
-//        tvAssetName = view.findViewById(R.id.tv_assetName);
-//        ivIcon = view.findViewById(R.id.iv_assetIcon);
-//        pbLoading = view.findViewById(R.id.pb_loading_4);
-//        sheetBehavior = BottomSheetBehavior.from(bs_device);
-    }
-
-    private void InitEvents() {
-    }
 
     @SuppressLint("MissingPermission")
     private void setMapView() {
@@ -115,6 +95,8 @@ public class MapFragment extends Fragment {
                 //event click marker
                 mapView.setOnMarkerClickListener(marker -> {
                     Device device = (Device) marker.getTag();
+                    String id = device.id;
+                    openDialog(id);
                     return false;
                 });
 
@@ -137,14 +119,23 @@ public class MapFragment extends Fragment {
                     Marker marker = mapView.addMarker(markerOptions);
                     marker.setTag(device);
 
-                    //move camera to marker
-//                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(device.getPoint(), 18);
-//                    mapView.animateCamera(cameraUpdate);
                 }
-                mapView.animateCamera(CameraUpdateFactory.newLatLngZoom(APIManager.center, APIManager.zoom));
+                // camera bounds
+//                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+//                builder.include(new LatLng(APIManager.bounds.get(0), APIManager.bounds.get(1)));
+//                builder.include(new LatLng(APIManager.bounds.get(2), APIManager.bounds.get(3)));
+//
+//                LatLngBounds bounds = builder.build();
+//                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 200);
+//                mapView.moveCamera(cu);
+//                mapView.setLatLngBoundsForCameraTarget(bounds);
+
+                //camera position
+                mapView.animateCamera(CameraUpdateFactory.newLatLngZoom(APIManager.center, APIManager.zoom+1));
+
+                //min max zoom
                 mapView.setMinZoomPreference(APIManager.min);
                 mapView.setMaxZoomPreference(APIManager.max);
-                //mapView.setLatLngBoundsForCameraTarget(mapModel.getBounds());
             }
 
         });
@@ -155,6 +146,42 @@ public class MapFragment extends Fragment {
         // If request is cancelled, the result arrays are empty.
         if (requestCode == 1 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             setMapView();
+        }
+    }
+    private void openDialog(@NonNull String assetId) {
+        Device device = Device.getDeviceById(assetId);
+
+        if (device != null) {
+            Dialog dialog = new Dialog(parentActivity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.bottom_sheet);
+
+            Window window = dialog.getWindow();
+            if(window==null){
+                return;
+            }
+
+            List<Attribute> attributes = device.getRequiredAttributes();
+            BottomSheetAdapter adapter = new BottomSheetAdapter(attributes);
+            LinearLayoutManager layoutManager =  new LinearLayoutManager(getContext());
+
+            TextView tvAssetName = dialog.findViewById(R.id.tv_Name);
+            ImageView ivIcon = dialog.findViewById(R.id.iv_Icon);
+            RecyclerView rv_attributes = dialog.findViewById(R.id.rv_attributes);
+
+            tvAssetName.setText(device.name);
+
+            ivIcon.setImageResource(device.getIconRes(device.type));
+
+            rv_attributes.setLayoutManager(layoutManager);
+            rv_attributes.setAdapter(adapter);
+
+            dialog.show();
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            window.getAttributes().windowAnimations = R.style.DialogAnimation;
+            window.setGravity(Gravity.BOTTOM);
+
         }
     }
 }

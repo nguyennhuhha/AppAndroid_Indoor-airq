@@ -2,12 +2,8 @@ package com.example.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -31,8 +27,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Locale;
 
@@ -70,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         ClickableSpan c1 = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
-                Intent intent = new Intent(MainActivity.this, Resetpw.class);
+                Intent intent = new Intent(MainActivity.this, ResetPass.class);
                 startActivity(intent);
                 //mở trang để reset password
             }

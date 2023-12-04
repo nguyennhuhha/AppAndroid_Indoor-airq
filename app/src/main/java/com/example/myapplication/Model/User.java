@@ -25,5 +25,4 @@ public class User {
     public static User getMe() {
         return me;
     }
-
 }

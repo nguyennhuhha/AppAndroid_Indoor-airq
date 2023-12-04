@@ -16,7 +16,7 @@
     <string name="reset_pass">Đổi mật khẩu</string>
     <string name="wait_loading">Vui lòng chờ...</string>
     <string name="success">Thành công</string>
-    <string name="resetpw_ment">Nhập tên đăng nhập và email tài khoản của bạn để đổi mật khẩu</string>
+    <string name="resetpw_ment">Nhập tên người dùng hoặc địa chỉ email của bạn và chúng tôi sẽ gửi cho bạn hướng dẫn về cách tạo mật khẩu mới.</string>
     <string name="newpassword">mặt khẩu mới</string>
     <string name="sunset">Hoàng hôn</string>
     <string name="sunrise">Bình minh</string>

@@ -29,7 +29,7 @@
             android:name=".HomePage"
             android:exported="false" />
         <activity
-            android:name=".Resetpw"
+            android:name=".ResetPass"
             android:exported="false" />
         <activity
             android:name=".LoadingActivity"

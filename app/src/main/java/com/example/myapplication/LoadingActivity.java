@@ -17,15 +17,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Model.Device;
 import com.example.myapplication.Model.Map;
+import com.example.myapplication.Model.Token;
 import com.example.myapplication.Model.User;
 import com.example.myapplication.Model.WeatherDevice;
 import com.example.myapplication.RestAPI.APIClient;
+import com.example.myapplication.RestAPI.APIClient1;
 import com.example.myapplication.RestAPI.APIInterface;
 import com.example.myapplication.RestAPI.APIManager;
 import com.example.myapplication.RestAPI.tokenResponse;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -40,7 +46,7 @@ public class LoadingActivity extends AppCompatActivity {
 
     private WeatherDevice defaultDevice;
     private AsyncTasks async;
-
+    private ProgressBar progressBar;
 
     @Override
     //quay trở về trang trước
@@ -52,16 +58,13 @@ public class LoadingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
-        async = new AsyncTasks(LoadingActivity.this);
-        async.execute();
-
         webView = findViewById(R.id.web_login);
         img = findViewById(R.id.back_btn);
+        progressBar=findViewById(R.id.progress);
         TextView text = findViewById(R.id.text_wait);
         img.setOnClickListener(new View.OnClickListener() {//quay về trang trước
             @Override
             public void onClick(View v) {
-//                onBackPressed();
                 Intent it = new Intent(LoadingActivity.this, MainActivity.class);
                 startActivity(it);
             }
@@ -141,8 +144,6 @@ public class LoadingActivity extends AppCompatActivity {
 
     }
     private void CallLoginService(String name, String pass){
-        ProgressBar progressBar = findViewById(R.id.progress);
-        progressBar.setVisibility(View.VISIBLE);
         try{
             final String id = name;
             final String key = pass;
@@ -157,22 +158,42 @@ public class LoadingActivity extends AppCompatActivity {
                             Gson objGson = new Gson();
                             tokenResponse objResp=objGson.fromJson(ResponseJson, tokenResponse.class);
                             token = objResp.getAccess_token();
-                            Toast.makeText(LoadingActivity.this, token, Toast.LENGTH_SHORT).show();
+                            APIClient1.token = token;
                             //Toast.makeText(LoadingActivity.this, "Token success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoadingActivity.this, APIClient1.token, Toast.LENGTH_SHORT).show();
                             TextView text = findViewById(R.id.text_wait);
                             text.setText("Success");
-                            progressBar.setVisibility(View.GONE);
-                            Intent it = new Intent(LoadingActivity.this, HomeActivity.class);
-                            startActivity(it);
-                            //Log.d("Map", String.valueOf(Map.MapObj.getVersion()));
-                            //Toast.makeText(LoadingActivity.this, String.valueOf(Map.MapObj.getVersion()), Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(LoadingActivity.this,User.getMe().username, Toast.LENGTH_SHORT).show();
-                            //defaultDevice = new WeatherDevice(Device.getDevice());
-                            //Toast.makeText(LoadingActivity.this, defaultDevice.temperature.getValueString(), Toast.LENGTH_SHORT).show();
+                            Executor executor = Executors.newSingleThreadExecutor();
+                            CompletableFuture.supplyAsync(() -> {
+                                async = new AsyncTasks(LoadingActivity.this);
+                                async.execute();
+                                try {
+                                    // Gọi get() để đợi AsyncTask hoàn thành và trả về kết quả
+                                    return async.get();
+                                } catch (InterruptedException | ExecutionException e) {
+                                    e.printStackTrace();
+                                    return null;
+                                }
+                            }, executor).thenAccept(result -> {
+                                // Xử lý kết quả ở đây sau khi AsyncTask hoàn thành
+                                if (result == "done"){
+                                    Log.d("Done Async", "Finish");
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            //Toast.makeText(LoadingActivity.this, User.getMe().username, Toast.LENGTH_SHORT).show();
+                                            progressBar.setVisibility(View.GONE);
+                                            Intent it = new Intent(LoadingActivity.this, HomeActivity.class);
+                                            startActivity(it);
+                                        }
+                                    });
+                                }
+                            });
                         }
                         catch (Exception e){
                             e.printStackTrace();
                             Toast.makeText(LoadingActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                            Log.d("Error", "API error");
                         }
                     }
                     else{

@@ -9,13 +9,14 @@ import android.widget.TextView;
 
 import com.example.myapplication.Model.Device;
 import com.example.myapplication.Model.Map;
+import com.example.myapplication.Model.Token;
 import com.example.myapplication.Model.User;
 import com.example.myapplication.RestAPI.APIManager;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-public class AsyncTasks extends AsyncTask<String, Long, Void> {
+public class AsyncTasks extends AsyncTask<String, Long, String> {
     private ProgressDialog pdWaiting;
     TextView textView;
     public static float minzoom;
@@ -30,12 +31,12 @@ public class AsyncTasks extends AsyncTask<String, Long, Void> {
         super.onPreExecute();
 
         //use UI thread here
-        pdWaiting = new ProgressDialog(this.context);
-        pdWaiting.setMessage(this.context.getString(R.string.wait_loading));
-        pdWaiting.show();
+//        pdWaiting = new ProgressDialog(this.context);
+//        pdWaiting.setMessage(this.context.getString(R.string.wait_loading));
+//        pdWaiting.show();
     }
     @Override
-    protected  Void doInBackground(String... params){
+    protected  String doInBackground(String... params){
         //Call API
         if (User.getMe() == null) {
             APIManager.getUserInfo();
@@ -53,7 +54,7 @@ public class AsyncTasks extends AsyncTask<String, Long, Void> {
         if (Map.getMapObj() == null) {
             APIManager.getMap();
         }
-        return null;
+        return "done";
     }
 
     @Override
@@ -61,10 +62,10 @@ public class AsyncTasks extends AsyncTask<String, Long, Void> {
         super.onProgressUpdate(values);
     }
     @Override
-    protected void onPostExecute(Void aVoid){
-        super.onPostExecute(aVoid);
-        if (pdWaiting.isShowing()){
-            pdWaiting.dismiss();
-        }
+    protected void onPostExecute(String res){
+//        if (pdWaiting.isShowing()){
+//            pdWaiting.dismiss();
+//        }
+        super.onPostExecute(res);
     }
 }

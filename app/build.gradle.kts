@@ -64,4 +64,7 @@ dependencies {
 
     implementation("io.reactivex:rxandroid:1.2.1")
     implementation("io.reactivex:rxjava:1.3.0")
+
+    //circle image
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 }

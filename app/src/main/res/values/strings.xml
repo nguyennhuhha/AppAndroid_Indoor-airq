@@ -4,8 +4,12 @@
     <string name="language">Language</string>
     <string name="welcome">Welcome</string>
     <string name="username">username</string>
+    <string name="Username">Username:</string>
     <string name="password">password</string>
     <string name="email">email</string>
+    <string name="Email">Email:</string>
+    <string name="first_name">First name:</string>
+    <string name="last_name">Last name:</string>
     <string name="confirm_pass">confirm password</string>
     <string name="login">Log in</string>
     <string name="signup">Sign up</string>
@@ -32,7 +36,8 @@
     <string name="sample_percent">%</string>
     <string name="home">Home</string>
     <string name="maps">Map</string>
-    <string name="admin">Admin</string>
+    <string name="admin">Account</string>
+    <string name="chart">Chart</string>
     <string name="celsius">°C</string>
     <string name="mm">mm</string>
     <string name="rainfall">Rainfall</string>

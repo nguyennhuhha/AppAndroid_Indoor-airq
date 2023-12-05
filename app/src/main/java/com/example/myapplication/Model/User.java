@@ -16,6 +16,8 @@ public class User {
     public String firstName = "";
     @SerializedName("lastName")
     public String lastName = "";
+    @SerializedName("email")
+    public String email = "";
 
     // Current logged in user
     private static User me;

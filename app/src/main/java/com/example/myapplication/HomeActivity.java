@@ -29,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
     public HomeFragment homeFrag;
     public MapFragment mapFrag;
     public ChartFragment chartFrag;
+    public AccountFragment accFrag;
     private FragmentTransaction ft;
     private WeatherDevice defaultDevice;
     private Fragment fragment;
@@ -63,6 +64,9 @@ public class HomeActivity extends AppCompatActivity {
         fm.beginTransaction().add(R.id.main_frame, chartFrag, "chart").commit();
         fm.beginTransaction().hide(chartFrag).commit();
 
+        fm.beginTransaction().add(R.id.main_frame, accFrag, "acc").commit();
+        fm.beginTransaction().hide(accFrag).commit();
+
         fm.beginTransaction().add(R.id.main_frame, homeFrag, "home").commit();
         fragment = homeFrag;
         navbar.selectTabAt(0, false);
@@ -76,6 +80,7 @@ public class HomeActivity extends AppCompatActivity {
         homeFrag = new HomeFragment();
         mapFrag = new MapFragment();
         chartFrag= new ChartFragment();
+        accFrag = new AccountFragment();
     }
     private void InitViews() {
         navbar = findViewById(R.id.bottom_bar);
@@ -98,6 +103,10 @@ public class HomeActivity extends AppCompatActivity {
                     case 2:
                         fm.beginTransaction().hide(fragment).commit();
                         fragment = chartFrag;
+                        break;
+                    case 3:
+                        fm.beginTransaction().hide(fragment).commit();
+                        fragment = accFrag;
                         break;
                 }
                 fm.beginTransaction()

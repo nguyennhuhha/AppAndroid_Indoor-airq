@@ -9,6 +9,10 @@
         android:icon="@drawable/ic_maps"
         android:title="@string/maps" />
     <item
+        android:id="@+id/nav_chart"
+        android:icon="@drawable/baseline_stacked_line_chart_24"
+        android:title="@string/chart" />
+    <item
         android:id="@+id/nav_admin"
         android:icon="@drawable/ic_admin"
         android:title="@string/admin" />

@@ -5,8 +5,12 @@
     <string name="language">Ngôn ngữ</string>
     <string name="welcome">Xin chào</string>
     <string name="username">tên đăng nhập</string>
+    <string name="Username">Tên đăng nhập:</string>
     <string name="password">mật khẩu</string>
     <string name="email">email</string>
+    <string name="Email">Email:</string>
+    <string name="first_name">Tên:</string>
+    <string name="last_name">Họ:</string>
     <string name="confirm_pass">xác nhận mật khẩu</string>
     <string name="login">Đăng nhập</string>
     <string name="signup">Đăng kí</string>
@@ -33,7 +37,8 @@
     <string name="sample_percent">%</string>
     <string name="home">Trang chủ</string>
     <string name="maps">Bản đồ</string>
-    <string name="admin">Admin</string>
+    <string name="admin">Tài khoản</string>
+    <string name="chart">Đồ thị</string>
     <string name="celsius">°C</string>
     <string name="mm">mm</string>
     <string name="rainfall">Lượng mưa</string>

@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.example.myapplication.Model.Datapoint;
 import com.example.myapplication.Model.Device;
 import com.example.myapplication.Model.Map;
 import com.example.myapplication.Model.Token;
@@ -53,6 +54,13 @@ public class AsyncTasks extends AsyncTask<String, Long, String> {
         }
         if (Map.getMapObj() == null) {
             APIManager.getMap();
+        }
+
+        if (Datapoint.getDatapointList() == null) {
+            String queryString = "{ \"fromTimestamp\": 1699056771451, \"toTimestamp\": 1701698167187, \"fromTime\": \"2023-11-03T07:13:07.945Z\", \"toTime\": \"2023-12-05T07:13:07.945Z\", \"type\": \"string\" }";
+            JsonParser jsonParser = new JsonParser();
+            JsonObject query = jsonParser.parse(queryString).getAsJsonObject();
+            APIManager.getDataPoint("5zI6XqkQVSfdgOrZ1MyWEf","rainfall",query);
         }
         return "done";
     }

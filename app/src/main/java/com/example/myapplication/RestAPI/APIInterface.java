@@ -2,6 +2,7 @@ package com.example.myapplication.RestAPI;
 
 import com.example.myapplication.Model.Device;
 import com.example.myapplication.Model.Map;
+import com.example.myapplication.Model.Datapoint;
 import com.example.myapplication.Model.User;
 import com.google.gson.JsonObject;
 
@@ -46,4 +47,10 @@ public interface APIInterface {
     @Headers("Content-Type: application/json")
     @POST("api/master/asset/query")
     Call<List<Device>> queryDevices(@Body JsonObject body);
+
+    //Getdatapoint
+    @Headers("Content-Type: application/json")
+    @POST("api/master/asset/datapoint/{assetId}/attribute/{attributeName}")
+    Call<List<Datapoint>> getDataPoint(@Path("assetId") String deviceID,
+                                       @Path("attributeName") String attributeName, @Body JsonObject body);
 }

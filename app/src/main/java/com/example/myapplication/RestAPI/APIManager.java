@@ -1,6 +1,7 @@
 package com.example.myapplication.RestAPI;
 
 import com.example.myapplication.LoadingActivity;
+import com.example.myapplication.Model.Datapoint;
 import com.example.myapplication.Model.Device;
 import com.example.myapplication.Model.Map;
 import com.example.myapplication.Model.Token;
@@ -130,6 +131,22 @@ public class APIManager {
                 Device.setDevicesList(deviceList);
             } else {
                 Device.setDevicesList(null);
+            }
+        } catch (IOException e) { e.printStackTrace(); }
+    }
+
+    //datapoint
+    public static void getDataPoint(String deviceID,String attributeName,JsonObject body) {
+        Call<List<Datapoint>> call = userAI.getDataPoint(deviceID,attributeName, body);
+        try {
+            Response<List<Datapoint>> response = call.execute();
+            if (response.isSuccessful() && response.code() == 200) {
+                List<Datapoint> datapoints = response.body();
+                Datapoint.setDatapointList(datapoints);
+                Log.d("Datapoint", String.valueOf(response.code()));
+                Log.d("Datapoint1", String.valueOf(Datapoint.getDatapointList().get(0).getTimestamp()));
+            } else {
+                Datapoint.setDatapointList(null);
             }
         } catch (IOException e) { e.printStackTrace(); }
     }

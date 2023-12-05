@@ -5,10 +5,10 @@
     <string name="language">Ngôn ngữ</string>
     <string name="welcome">Xin chào</string>
     <string name="username">tên đăng nhập</string>
-    <string name="Username">Tên đăng nhập:</string>
+    <string name="Username">Tên đăng nhập: </string>
     <string name="password">mật khẩu</string>
     <string name="email">email</string>
-    <string name="Email">Email:</string>
+    <string name="Email">Email: </string>
     <string name="first_name">Tên:</string>
     <string name="last_name">Họ:</string>
     <string name="confirm_pass">xác nhận mật khẩu</string>
@@ -46,4 +46,27 @@
     <string name="km_h">km/h</string>
     <string name="mapbox_access_token">sk.eyJ1IjoicGF0dXMiLCJhIjoiY2w5NnFuaWE4MDVlMTN2cGp6MnZzcGZuYSJ9.FseUDG-zlpql4XkRhJTe5A</string>
     <string name="device_icon">Device Icon</string>
+    <string name="feedback">Phản hồi thực tế</string>
+    <string name="overall">Tổng quan: </string>
+    <string name="sunny">Có nắng</string>
+    <string name="cloudy">Có mây</string>
+    <string name="rain">Mưa</string>
+    <string name="degree">Nhiệt độ: </string>
+    <string name="hotter">Nóng hơn</string>
+    <string name="true_degree">Đúng với thực tế</string>
+    <string name="colder">Lạnh hơn</string>
+    <string name="wind">Gió: </string>
+    <string name="windier">Nhiều gió hơn</string>
+    <string name="less_windy">Ít gió hơn</string>
+    <string name="other">Khác: </string>
+    <string name="rainbow">Cầu vồng</string>
+    <string name="tornado">Lốc xoáy</string>
+    <string name="storm">Bão</string>
+    <string name="submit">Gửi</string>
+    <string name="history">Xem phản hồi</string>
+    <string name="sending_time">Thời gian gửi: </string>
+
+
+
+
 </resources>

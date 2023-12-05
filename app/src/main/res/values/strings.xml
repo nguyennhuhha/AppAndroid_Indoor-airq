@@ -4,10 +4,10 @@
     <string name="language">Language</string>
     <string name="welcome">Welcome</string>
     <string name="username">username</string>
-    <string name="Username">Username:</string>
+    <string name="Username">Username: </string>
     <string name="password">password</string>
     <string name="email">email</string>
-    <string name="Email">Email:</string>
+    <string name="Email">Email: </string>
     <string name="first_name">First name:</string>
     <string name="last_name">Last name:</string>
     <string name="confirm_pass">confirm password</string>
@@ -45,4 +45,25 @@
     <string name="km_h">km/h</string>
     <string name="mapbox_access_token">sk.eyJ1IjoicGF0dXMiLCJhIjoiY2w5NnFuaWE4MDVlMTN2cGp6MnZzcGZuYSJ9.FseUDG-zlpql4XkRhJTe5A</string>
     <string name="device_icon">Device Icon</string>
+    <string name="feedback">Feedback</string>
+    <string name="overall">Overall: </string>
+    <string name="sunny">Sunny</string>
+    <string name="cloudy">Cloudy</string>
+    <string name="rain">Rain</string>
+    <string name="degree">Degree: </string>
+    <string name="hotter">Hotter</string>
+    <string name="true_degree">True in reality</string>
+    <string name="colder">Colder</string>
+    <string name="wind">Wind: </string>
+    <string name="windier">Windier</string>
+    <string name="less_windy">Less windy</string>
+    <string name="other">Other: </string>
+    <string name="rainbow">Rainbow</string>
+    <string name="tornado">Tornado</string>
+    <string name="storm">Storm</string>
+    <string name="submit">Send feedback</string>
+    <string name="history">See other feedback</string>
+    <string name="sending_time">Sending time: </string>
+
+
 </resources>

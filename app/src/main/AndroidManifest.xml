@@ -19,9 +19,17 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".OtherFeedback"
+            android:exported="false" />
+        <activity
+            android:name=".FeedbackActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCWlKvhlfmeTTXnGrK9uwDOr7uxv6swhGE" />
+
         <activity
             android:name=".HomeActivity"
             android:exported="false" />

@@ -1,9 +1,11 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,7 @@ public class AccountFragment extends Fragment {
     private HomeActivity parentActivity;
     private View mView;
     private TextView name, email, first, last;
+    private Button send, history;
     public AccountFragment() {
 
     }
@@ -39,11 +42,30 @@ public class AccountFragment extends Fragment {
         email = mView.findViewById(R.id.user_mail);
         first= mView.findViewById(R.id.user_first);
         last = mView.findViewById(R.id.user_last);
+        send = mView.findViewById(R.id.send_btn);
+        history=mView.findViewById(R.id.history_btn);
 
         name.setText(User.getMe().username);
         email.setText(User.getMe().email);
         first.setText(User.getMe().firstName);
         last.setText(User.getMe().lastName);
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(parentActivity, FeedbackActivity.class);
+                it.putExtra("usr_name", name.getText().toString());
+                it.putExtra("usr_email", email.getText().toString());
+                startActivity(it);
+            }
+        });
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(parentActivity, OtherFeedback.class);
+                startActivity(it);
+            }
+        });
     }
 
     @Override

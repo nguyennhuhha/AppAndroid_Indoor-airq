@@ -47,17 +47,17 @@
         android:textSize="20dp"
         android:layout_below="@id/img_acc"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="30dp" />
     <TextView
         android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/username"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:layout_toEndOf="@id/tv_usr"
         android:layout_below="@id/img_acc"
         android:layout_marginLeft="33dp"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="33dp" />
     <ImageView
         android:id="@+id/iv_u"
         android:layout_width="match_parent"
@@ -81,11 +81,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/email"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:layout_toEndOf="@id/tv_usr"
         android:layout_below="@id/user_name"
         android:layout_marginLeft="33dp"
-        android:layout_marginTop="51dp" />
+        android:layout_marginTop="53dp" />
     <ImageView
         android:id="@+id/iv_e"
         android:layout_width="match_parent"
@@ -109,11 +109,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/first_name"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:layout_toEndOf="@id/tv_usr"
         android:layout_below="@id/user_mail"
         android:layout_marginLeft="33dp"
-        android:layout_marginTop="49dp" />
+        android:layout_marginTop="53dp" />
     <ImageView
         android:id="@+id/iv_f"
         android:layout_width="match_parent"
@@ -137,11 +137,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/last_name"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:layout_toEndOf="@id/tv_usr"
         android:layout_below="@id/user_first"
         android:layout_marginLeft="33dp"
-        android:layout_marginTop="49dp" />
+        android:layout_marginTop="53dp" />
     <ImageView
         android:id="@+id/iv_l"
         android:layout_width="match_parent"
@@ -151,5 +151,30 @@
         android:layout_marginEnd="4dp"
         android:src="@color/darker_grey"
         android:layout_below="@id/tv_last" />
+    <Button
+        android:layout_width="160dp"
+        android:id="@+id/send_btn"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="25dp"
+        android:padding="10dp"
+        android:text="@string/submit"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:layout_below="@id/iv_l">
+    </Button>
+    <Button
+        android:layout_width="wrap_content"
+        android:id="@+id/history_btn"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="10dp"
+        android:padding="10dp"
+        android:layout_toEndOf="@id/send_btn"
+        android:text="@string/history"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:layout_below="@id/iv_l">
+    </Button>
 
 </RelativeLayout>

@@ -55,7 +55,6 @@ public class AsyncTasks extends AsyncTask<String, Long, String> {
         if (Map.getMapObj() == null) {
             APIManager.getMap();
         }
-
         if (Datapoint.getDatapointList() == null) {
             String queryString = "{ \"fromTimestamp\": 1699056771451, \"toTimestamp\": 1701698167187, \"fromTime\": \"2023-11-03T07:13:07.945Z\", \"toTime\": \"2023-12-05T07:13:07.945Z\", \"type\": \"string\" }";
             JsonParser jsonParser = new JsonParser();

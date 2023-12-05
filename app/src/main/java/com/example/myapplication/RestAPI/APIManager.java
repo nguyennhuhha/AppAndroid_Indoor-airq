@@ -12,7 +12,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -143,8 +145,8 @@ public class APIManager {
             if (response.isSuccessful() && response.code() == 200) {
                 List<Datapoint> datapoints = response.body();
                 Datapoint.setDatapointList(datapoints);
-                Log.d("Datapoint", String.valueOf(response.code()));
-                Log.d("Datapoint1", String.valueOf(Datapoint.getDatapointList().get(0).getTimestamp()));
+                Log.d("API DATAPOINT", String.valueOf(response.code()));
+                Log.d("Datapoint", String.valueOf(Datapoint.getDatapointList().get(0).getTimestamp()));
             } else {
                 Datapoint.setDatapointList(null);
             }

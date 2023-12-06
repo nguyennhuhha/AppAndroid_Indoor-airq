@@ -122,7 +122,7 @@ public class FeedbackActivity extends AppCompatActivity {
             other = cbOther33.getText().toString();
         }
         Feedback a = new Feedback(User.getMe().username, User.getMe().email,
-                Utils.formatLongToDate(Calendar.getInstance().getTimeInMillis()), overall , temp ,wind ,other);
+                Utils.formatLongToDate1(Calendar.getInstance().getTimeInMillis()), overall , temp ,wind ,other);
         Log.d("Fb1", a.username + a.email + a.time + a.overall + a.degree + a.wind + a.other);
         FeedbackHandler db = new FeedbackHandler(v.getContext());
         db.addFB(a);

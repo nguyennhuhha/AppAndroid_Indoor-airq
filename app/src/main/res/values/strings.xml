@@ -65,6 +65,9 @@
     <string name="history">See other feedback</string>
     <string name="sending_time">Sending time: </string>
     <string name="join">Joined on:</string>
-
+    <string name="attribute">Attribute</string>
+    <string name="timeframe">Timeframe</string>
+    <string name="show">Show</string>
+    <string name="ending">Ending</string>
 
 </resources>

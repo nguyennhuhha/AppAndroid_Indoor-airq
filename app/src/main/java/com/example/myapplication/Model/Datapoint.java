@@ -11,12 +11,34 @@ public class Datapoint {
     @SerializedName("y")
     private float value;
 
-    private static List<Datapoint> datapoints=null;
-    public static List<Datapoint> getDatapointList() {
-        return datapoints;
+    private static List<Datapoint> datapointRainfall=null;
+    private static List<Datapoint> datapointTemperature=null;
+    private static List<Datapoint> datapointHumidity=null;
+    public static List<Datapoint> datapointWindspeed=null;
+
+    public static List<Datapoint> getDatapointRainfallList() {
+        return datapointRainfall;
     }
-    public static void setDatapointList(List<Datapoint> datapoints) {
-        Datapoint.datapoints = datapoints;
+    public static void setDatapointRainfallList(List<Datapoint> datapoints) {
+        Datapoint.datapointRainfall = datapoints;
+    }
+    public static List<Datapoint> getDatapointTemperatureList() {
+        return datapointTemperature;
+    }
+    public static void setDatapointTemperatureList(List<Datapoint> datapoints) {
+        Datapoint.datapointTemperature = datapoints;
+    }
+    public static List<Datapoint> getDatapointHumidityList() {
+        return datapointHumidity;
+    }
+    public static void setDatapointHumidityList(List<Datapoint> datapoints) {
+        Datapoint.datapointHumidity = datapoints;
+    }
+    public static List<Datapoint> getDatapointWindspeedList() {
+        return datapointWindspeed;
+    }
+    public static void setDatapointWindspeedList(List<Datapoint> datapoints) {
+        Datapoint.datapointWindspeed = datapoints;
     }
     public Datapoint(long timestamp, float value) {
         this.timestamp = timestamp;

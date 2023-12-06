@@ -5,8 +5,11 @@ import android.os.Handler;
 
 import com.example.myapplication.Model.Datapoint;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class Utils {
 
@@ -30,20 +33,32 @@ public class Utils {
         float density = context.getResources().getDisplayMetrics().density;
         return Math.round((float) dp * density);
     }
-//    public static long convertTime(String time) {
-////        2017-02-08 00:55:29
-//        //03:48:33 04-05-2017
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        sdf.setTimeZone(TimeZone.getDefault());
-//
-//        Date date = new Date();
-//        try {
-//            date = sdf.parse(time);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        return date.getTime();
-//    }
+    public static long convertTime(String time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        sdf.setTimeZone(TimeZone.getDefault());
+
+        Date date = new Date();
+        try {
+            date = sdf.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date.getTime();
+    }
+    public static long convertHourTime(String time) {
+//        2017-02-08 00:55:29
+        //03:48:33 04-05-2017
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+        sdf.setTimeZone(TimeZone.getDefault());
+
+        Date date = new Date();
+        try {
+            date = sdf.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date.getTime();
+    }
 
     public static String getDateNow() {
         Calendar c = Calendar.getInstance();
@@ -67,7 +82,7 @@ public class Utils {
     public static String formatLongToDate(long timeLong) {
         Calendar c = Calendar.getInstance();
         c.setTimeInMillis(timeLong);
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM");
         return df.format(c.getTime());
     }
     public static String formatLongToMonth(long timeLong) {

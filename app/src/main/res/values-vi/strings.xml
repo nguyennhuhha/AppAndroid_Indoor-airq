@@ -66,6 +66,10 @@
     <string name="history">Xem phản hồi</string>
     <string name="sending_time">Thời gian gửi: </string>
     <string name="join">Tham gia:</string>
+    <string name="attribute">Attribute</string>
+    <string name="timeframe">Timeframe</string>
+    <string name="show">Hiển thị</string>
+    <string name="ending">Ending</string>
 
 
 

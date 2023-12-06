@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private void navigateToHomepage(){
-        Intent intent = new Intent(MainActivity.this,HomePage.class);
+        Intent intent = new Intent(MainActivity.this,HomeActivity.class);
         startActivity(intent);
     }
     private void showChangeLaguageDialog(){

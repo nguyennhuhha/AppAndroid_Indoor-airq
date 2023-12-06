@@ -4,10 +4,12 @@
     <color name="white">#FFFFFFFF</color>
     //bg
     <color name="lightgreen">#93B9B5</color>
+    <color name="greenlightmax">#FCFCFC</color>
     <color name="green">#FFADD8BD</color>
     <color name="greenlv2">#325B57</color>
     <color name="greenlv3">#467970</color>
     <color name="yellowlight">#FFFFF2</color>
+    <color name="yellowchart">#FFFEE8</color>
     <color name="my_light_primary">#D7FFDC</color>
     <color name="dark_greenlv1">#1B2F2E</color>
     <color name="green1">#FFE7EFDE</color>

@@ -138,18 +138,56 @@ public class APIManager {
     }
 
     //datapoint
-    public static void getDataPoint(String deviceID,String attributeName,JsonObject body) {
+    public static void getDataPointRainfall(String deviceID,String attributeName,JsonObject body) {
         Call<List<Datapoint>> call = userAI.getDataPoint(deviceID,attributeName, body);
         try {
             Response<List<Datapoint>> response = call.execute();
             if (response.isSuccessful() && response.code() == 200) {
                 List<Datapoint> datapoints = response.body();
-                Datapoint.setDatapointList(datapoints);
-                Log.d("API DATAPOINT", String.valueOf(response.code()));
-                Log.d("Datapoint", String.valueOf(Datapoint.getDatapointList().get(0).getTimestamp()));
+                Datapoint.setDatapointRainfallList(datapoints);
+                Log.d("API DATAPOINT_RAINFALL", String.valueOf(response.code()));
             } else {
-                Datapoint.setDatapointList(null);
+                Datapoint.setDatapointRainfallList(null);
             }
         } catch (IOException e) { e.printStackTrace(); }
     }
+    public static void getDataPointTemperature(String deviceID,String attributeName,JsonObject body) {
+        Call<List<Datapoint>> call = userAI.getDataPoint(deviceID,attributeName, body);
+        try {
+            Response<List<Datapoint>> response = call.execute();
+            if (response.isSuccessful() && response.code() == 200) {
+                List<Datapoint> datapoints = response.body();
+                Datapoint.setDatapointTemperatureList(datapoints);
+                Log.d("API DATAPOINT_TEMPERATURE", String.valueOf(response.code()));
+            } else {
+                Datapoint.setDatapointTemperatureList(null);
+            }
+        } catch (IOException e) { e.printStackTrace(); }
+    }public static void getDataPointHumidity(String deviceID,String attributeName,JsonObject body) {
+        Call<List<Datapoint>> call = userAI.getDataPoint(deviceID,attributeName, body);
+        try {
+            Response<List<Datapoint>> response = call.execute();
+            if (response.isSuccessful() && response.code() == 200) {
+                List<Datapoint> datapoints = response.body();
+                Datapoint.setDatapointHumidityList(datapoints);
+                Log.d("API DATAPOINT_Humidity", String.valueOf(response.code()));
+            } else {
+                Datapoint.setDatapointHumidityList(null);
+            }
+        } catch (IOException e) { e.printStackTrace(); }
+    }
+    public static void getDataPointWindSpeed(String deviceID,String attributeName,JsonObject body) {
+        Call<List<Datapoint>> call = userAI.getDataPoint(deviceID,attributeName, body);
+        try {
+            Response<List<Datapoint>> response = call.execute();
+            if (response.isSuccessful() && response.code() == 200) {
+                List<Datapoint> datapoints = response.body();
+                Datapoint.setDatapointWindspeedList(datapoints);
+                Log.d("API DATAPOINT_WindSpeed", String.valueOf(response.code()));
+            } else {
+                Datapoint.setDatapointWindspeedList(null);
+            }
+        } catch (IOException e) { e.printStackTrace(); }
+    }
+
 }

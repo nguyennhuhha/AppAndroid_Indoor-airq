@@ -55,11 +55,29 @@ public class AsyncTasks extends AsyncTask<String, Long, String> {
         if (Map.getMapObj() == null) {
             APIManager.getMap();
         }
-        if (Datapoint.getDatapointList() == null) {
-            String queryString = "{ \"fromTimestamp\": 1699056771451, \"toTimestamp\": 1701698167187, \"fromTime\": \"2023-11-03T07:13:07.945Z\", \"toTime\": \"2023-12-05T07:13:07.945Z\", \"type\": \"string\" }";
+        if (Datapoint.getDatapointRainfallList() == null) {
+            String queryString = "{ \"fromTimestamp\": 1698834342208, \"toTimestamp\": 1701771942208, \"fromTime\": \"2023-11-01T07:13:07.945Z\", \"toTime\": \"2023-12-05T10:25:42.208Z\", \"type\": \"string\" }";
             JsonParser jsonParser = new JsonParser();
             JsonObject query = jsonParser.parse(queryString).getAsJsonObject();
-            APIManager.getDataPoint("5zI6XqkQVSfdgOrZ1MyWEf","rainfall",query);
+            APIManager.getDataPointRainfall("5zI6XqkQVSfdgOrZ1MyWEf","rainfall",query);
+        }
+        if (Datapoint.getDatapointTemperatureList() == null) {
+            String queryString = "{ \"fromTimestamp\": 1698834342208, \"toTimestamp\": 1701771942208, \"fromTime\": \"2023-11-01T07:13:07.945Z\", \"toTime\": \"2023-12-05T10:25:42.208Z\", \"type\": \"string\" }";
+            JsonParser jsonParser = new JsonParser();
+            JsonObject query = jsonParser.parse(queryString).getAsJsonObject();
+            APIManager.getDataPointTemperature("5zI6XqkQVSfdgOrZ1MyWEf","temperature",query);
+        }
+        if (Datapoint.getDatapointHumidityList() == null) {
+            String queryString = "{ \"fromTimestamp\": 1698834342208, \"toTimestamp\": 1701771942208, \"fromTime\": \"2023-11-01T07:13:07.945Z\", \"toTime\": \"2023-12-05T10:25:42.208Z\", \"type\": \"string\" }";
+            JsonParser jsonParser = new JsonParser();
+            JsonObject query = jsonParser.parse(queryString).getAsJsonObject();
+            APIManager.getDataPointHumidity("5zI6XqkQVSfdgOrZ1MyWEf","humidity",query);
+        }
+        if (Datapoint.getDatapointWindspeedList() == null) {
+            String queryString = "{ \"fromTimestamp\": 1698834342208, \"toTimestamp\": 1701771942208, \"fromTime\": \"2023-11-01T07:13:07.945Z\", \"toTime\": \"2023-12-05T10:25:42.208Z\", \"type\": \"string\" }";
+            JsonParser jsonParser = new JsonParser();
+            JsonObject query = jsonParser.parse(queryString).getAsJsonObject();
+            APIManager.getDataPointWindSpeed("5zI6XqkQVSfdgOrZ1MyWEf","windSpeed",query);
         }
         return "done";
     }

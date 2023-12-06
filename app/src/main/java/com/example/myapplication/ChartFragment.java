@@ -101,14 +101,12 @@ public class ChartFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 attribute = parent.getItemAtPosition(position).toString();
-                Toast.makeText(context, "Item: " + attribute, Toast.LENGTH_SHORT).show();
             }
         });
         auto_tf.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 timeframe = parent.getItemAtPosition(position).toString();
-                Toast.makeText(context, "Item: " + timeframe, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -164,12 +162,12 @@ public class ChartFragment extends Fragment {
     private void process_endingDate(List<Datapoint> listdatapoint,List<Datapoint> datapoints,String datetime, String timeframe){
         long timestamp = 1701848814712L;
         long timesmonth = 1698835169710L;
-        String hourtime = "00:00:00 " + datetime;
+        String hourtime = "23:59:59 " + datetime;
         long timesday = 1698796800000L;
         if (datetime==null){
             Toast.makeText(context, "Pick date ending", Toast.LENGTH_SHORT).show();
         } else {
-            timestamp = Utils.convertTime(datetime);
+            timestamp = Utils.convertHourTime(hourtime);
             timesmonth = Utils.convertTime(monthtime);
             timesday = Utils.convertHourTime(hourtime);
         }
@@ -313,11 +311,7 @@ public class ChartFragment extends Fragment {
 //        yAxisRight.setEnabled(false);      // bỏ trục Y bên phải
         xAxis.setAxisLineWidth(2f);     // độ dày của trục X,Y
         yAxisLeft.setAxisLineWidth(2f);
-        if(attribute.equals("Rainfall (mm)")){
-            yAxisLeft.setGranularity(0.2f);
-        } else {
-            yAxisLeft.setGranularity(1f); //khoảng cach giua các diem Y
-        }
+//        yAxisLeft.setGranularity(1f); //khoảng cach giua các diem Y
         xAxis.setAxisLineColor(R.color.dark_greenlv1); // Màu của đường trục X
         yAxisLeft.setAxisLineColor(R.color.dark_greenlv1);
 

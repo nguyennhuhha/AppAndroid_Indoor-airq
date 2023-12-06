@@ -32,13 +32,13 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyView
     public void onBindViewHolder(@NonNull FeedbackAdapter.MyViewHolder holder, int position) {
         Feedback feedback = fbs.get(position);
         if (feedback == null) return;
-        holder.email.setText("Email: "+feedback.getEmail());
-        holder.name.setText("Username: "+feedback.getUsername());
-        holder.time.setText("Sending time: " + feedback.getTime());
-        holder.overall.setText("Overall: "+feedback.getOverall());
-        holder.temp.setText("Temperature: "+feedback.getDegree());
-        holder.wind.setText("Wind: "+feedback.getWind());
-        holder.other.setText("Other: "+feedback.getOther());
+        holder.email.setText(feedback.getEmail());
+        holder.name.setText(feedback.getUsername());
+        holder.time.setText(feedback.getTime());
+        holder.overall.setText(feedback.getOverall());
+        holder.temp.setText(feedback.getDegree());
+        holder.wind.setText(feedback.getWind());
+        holder.other.setText(feedback.getOther());
         // Set long click listener for each item
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

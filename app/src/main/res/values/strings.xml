@@ -64,6 +64,7 @@
     <string name="submit">Send feedback</string>
     <string name="history">See other feedback</string>
     <string name="sending_time">Sending time: </string>
+    <string name="join">Joined on:</string>
 
 
 </resources>

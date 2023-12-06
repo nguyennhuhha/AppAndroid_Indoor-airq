@@ -17,7 +17,7 @@ import com.example.myapplication.Model.User;
 public class AccountFragment extends Fragment {
     private HomeActivity parentActivity;
     private View mView;
-    private TextView name, email, first, last;
+    private TextView name, email, first;
     private Button send, history;
     public AccountFragment() {
 
@@ -41,21 +41,19 @@ public class AccountFragment extends Fragment {
         name = mView.findViewById(R.id.user_name);
         email = mView.findViewById(R.id.user_mail);
         first= mView.findViewById(R.id.user_first);
-        last = mView.findViewById(R.id.user_last);
         send = mView.findViewById(R.id.send_btn);
         history=mView.findViewById(R.id.history_btn);
 
         name.setText(User.getMe().username);
         email.setText(User.getMe().email);
-        first.setText(User.getMe().firstName);
-        last.setText(User.getMe().lastName);
+        first.setText(Utils.formatLongToDate(User.getMe().createdOn));
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(parentActivity, FeedbackActivity.class);
-                it.putExtra("usr_name", name.getText().toString());
-                it.putExtra("usr_email", email.getText().toString());
+//                it.putExtra("usr_name", name.getText().toString());
+//                it.putExtra("usr_email", email.getText().toString());
                 startActivity(it);
             }
         });

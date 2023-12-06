@@ -33,7 +33,7 @@
         android:text="Feedback"
         android:textAlignment="center"
         android:textSize="80sp"
-        android:textColor="#667754" />
+        android:textColor="@color/greenlv2" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_fb"
         android:layout_width="match_parent"

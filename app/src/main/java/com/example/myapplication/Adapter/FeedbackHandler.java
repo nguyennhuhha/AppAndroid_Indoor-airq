@@ -73,7 +73,7 @@ public class FeedbackHandler extends SQLiteOpenHelper {
         if (res==-1){
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
         } else{
-            Toast.makeText(context, "Added successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Sent successfully", Toast.LENGTH_SHORT).show();
         }
     }
     public List<Feedback> getAllFb(){

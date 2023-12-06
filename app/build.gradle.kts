@@ -67,4 +67,7 @@ dependencies {
 
     //circle image
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+    //card view
+    implementation("androidx.cardview:cardview:1.0.0")
+
 }

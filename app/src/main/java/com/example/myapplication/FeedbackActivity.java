@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.Adapter.FeedbackHandler;
 import com.example.myapplication.Model.Feedback;
@@ -26,7 +27,6 @@ public class FeedbackActivity extends AppCompatActivity {
 
     private TextView cbOver11, cbOver22, cbOver33, cbTemp11, cbTemp22,
             cbTemp33, cbWind11, cbWind22, cbWind33, cbOther11, cbOther22, cbOther33;
-    private String name, email;
     String overall = "";
     String temp= "";
     String wind= "";
@@ -40,9 +40,6 @@ public class FeedbackActivity extends AppCompatActivity {
         submit = findViewById(R.id.submit);
 
         InitViews();
-        Intent it = getIntent();
-        name = it.getStringExtra("usr_name");
-        email = it.getStringExtra("usr_email");
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,7 +121,8 @@ public class FeedbackActivity extends AppCompatActivity {
         }else{
             other = cbOther33.getText().toString();
         }
-        Feedback a = new Feedback(name, email, Utils.formatLongToDate(Calendar.getInstance().getTimeInMillis()), overall , temp ,wind ,other);
+        Feedback a = new Feedback(User.getMe().username, User.getMe().email,
+                Utils.formatLongToDate(Calendar.getInstance().getTimeInMillis()), overall , temp ,wind ,other);
         Log.d("Fb1", a.username + a.email + a.time + a.overall + a.degree + a.wind + a.other);
         FeedbackHandler db = new FeedbackHandler(v.getContext());
         db.addFB(a);

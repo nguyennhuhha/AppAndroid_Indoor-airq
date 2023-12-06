@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private Button signup;
     private TextView reset_pass;
 
-    GoogleSignInOptions gso;
-    GoogleSignInClient gsc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         login = (Button) findViewById(R.id.signin_btn);
         signup = (Button) findViewById(R.id.signup_btn);
         reset_pass = (TextView) findViewById(R.id.resetpwtext);
-        conwgoogle = (Button) findViewById(R.id.signinwgg_btn);
         changlang = (ImageButton) findViewById(R.id.btn_changelang);
 
         //change language
@@ -93,44 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
-
-        //continue with google
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        gsc = GoogleSignIn.getClient(this, gso);
-        conwgoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SignIn();
-            }
-        });
     }
 
-    private void SignIn() {
-        Intent intent =gsc.getSignInIntent();
-        startActivityForResult(intent,100);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode ==100) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                task.getResult(ApiException.class);
-                navigateToHomepage();
-            } catch (ApiException e){
-                Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-    private void navigateToHomepage(){
-        Intent intent = new Intent(MainActivity.this,HomeActivity.class);
-        startActivity(intent);
-    }
     private void showChangeLaguageDialog(){
         final String[] listItems = {"Tiếng Việt", "English"};
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);

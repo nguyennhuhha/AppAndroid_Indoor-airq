@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/signup_btn"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="30dp"
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/robotobold"
@@ -50,32 +50,14 @@
         android:id="@+id/signup_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/signinwgg_btn"
-        android:layout_marginBottom="20dp"
+        android:layout_above="@id/resetpwtext"
+        android:layout_marginBottom="50dp"
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/robotobold"
         android:text="@string/signup"
         android:textColor="@color/dark_greenlv1"
         android:textSize="24sp"
-        app:cornerRadius="15dp" />
-
-    <Button
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:id="@+id/signinwgg_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/resetpwtext"
-        android:layout_marginBottom="30dp"
-        android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/white"
-        android:fontFamily="@font/robotobold"
-        android:text="@string/continue_gg"
-        android:textColor="@color/dark_greenlv1"
-        android:drawableLeft="@drawable/icon_google"
-        android:drawablePadding="0dp"
-        android:textSize="23sp"
         app:cornerRadius="15dp" />
 
     <TextView

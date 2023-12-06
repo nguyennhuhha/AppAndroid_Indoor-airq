@@ -4,10 +4,8 @@ import com.example.myapplication.LoadingActivity;
 import com.example.myapplication.Model.Datapoint;
 import com.example.myapplication.Model.Device;
 import com.example.myapplication.Model.Map;
-import com.example.myapplication.Model.Token;
 import com.example.myapplication.Model.User;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 

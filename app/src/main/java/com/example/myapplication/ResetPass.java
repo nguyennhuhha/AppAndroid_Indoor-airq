@@ -60,11 +60,12 @@ public class ResetPass extends AppCompatActivity {
     private void doResetPwd(String username, View view) {
         android.webkit.CookieManager cookieManager = android.webkit.CookieManager.getInstance();
 
+        String baseUrl = "https://uiot.ixxc.dev/";
         cookieManager.setAcceptCookie(true);
         cookieManager.acceptCookie();
         CookieManager.setAcceptFileSchemeCookies(true);
         CookieManager.getInstance().setAcceptCookie(true);
-        cookieManager.getCookie(GlobalVars.baseUrl);
+        cookieManager.getCookie(baseUrl);
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setLoadWithOverviewMode(true);

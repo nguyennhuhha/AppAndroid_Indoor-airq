@@ -22,7 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.Model.Datapoint;
-import com.example.myapplication.Model.Token;
 import com.example.myapplication.RestAPI.APIInterface;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;

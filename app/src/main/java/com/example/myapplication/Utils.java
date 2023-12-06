@@ -27,12 +27,6 @@ public class Utils {
                 " "
         );
     }
-
-    // Convert dp to px
-    public static int dpToPx(Context context, int dp) {
-        float density = context.getResources().getDisplayMetrics().density;
-        return Math.round((float) dp * density);
-    }
     public static long convertTime(String time) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         sdf.setTimeZone(TimeZone.getDefault());
@@ -67,17 +61,6 @@ public class Utils {
         return time;
     }
 
-//    public static long formatStringToLong(String stringUTCDate) {
-//        SimpleDateFormat df = new SimpleDateFormat("HH:mm dd/MM/yyyy");
-//        df.setTimeZone(TimeZone.getTimeZone("UTC"));
-//        df.toLocalizedPattern();     // lấy giờ theo vị trí
-//        try {
-//            Date time = df.parse(stringUTCDate);
-//            return (time.getTime() / 1000);
-//        } catch (ParseException e) {
-//            return 0;
-//        }
-//    }
 
     public static String formatLongToDate(long timeLong) {
         Calendar c = Calendar.getInstance();
@@ -108,13 +91,6 @@ public class Utils {
         Calendar c = Calendar.getInstance();
         c.setTimeInMillis(timeLong);
         SimpleDateFormat df = new SimpleDateFormat("HH:mm");
-        return df.format(c.getTime());
-    }
-
-    public static String formatLongToDateHour(long timeLong) {
-        Calendar c = Calendar.getInstance();
-        c.setTimeInMillis(timeLong);
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return df.format(c.getTime());
     }
 

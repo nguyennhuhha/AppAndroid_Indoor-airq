@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Model.Device;
 import com.example.myapplication.Model.Map;
-import com.example.myapplication.Model.Token;
 import com.example.myapplication.Model.User;
 import com.example.myapplication.Model.WeatherDevice;
 import com.example.myapplication.RestAPI.APIClient;

@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.example.myapplication.Model.Datapoint;
 import com.example.myapplication.Model.Device;
 import com.example.myapplication.Model.Map;
-import com.example.myapplication.Model.Token;
 import com.example.myapplication.Model.User;
 import com.example.myapplication.RestAPI.APIManager;
 import com.google.gson.JsonElement;

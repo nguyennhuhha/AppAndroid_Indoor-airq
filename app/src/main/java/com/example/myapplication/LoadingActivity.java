@@ -1,10 +1,12 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Printer;
 import android.view.View;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -39,14 +41,19 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoadingActivity extends AppCompatActivity {
-    private WebView webView;
+    private WebView webView, webView1;
     private ImageView img;
     public String token;
     public String api;
 
-    private WeatherDevice defaultDevice;
     private AsyncTasks async;
     private ProgressBar progressBar;
+    private String baseurl = "https://uiot.ixxc.dev";
+//    private String client = "openremote";
+//    private String encodedBaseurl = baseurl.replace(":","%3A").replace("/","%2F");
+//    private String signUpurl = baseurl +
+//            "auth/realms/master/protocol/openid-connect/auth?response_type=code&client_id=" +
+//            client + "&redirect_uri=" + encodedBaseurl + "swagger%2Foauth2-redirect.html&state=AAAA";
 
     @Override
     //quay trở về trang trước
@@ -58,10 +65,12 @@ public class LoadingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
-        webView = findViewById(R.id.web_login);
         img = findViewById(R.id.back_btn);
+        webView = findViewById(R.id.web_login);
         progressBar=findViewById(R.id.progress);
         TextView text = findViewById(R.id.text_wait);
+
+        //Log.d("url", signUpurl);
         img.setOnClickListener(new View.OnClickListener() {//quay về trang trước
             @Override
             public void onClick(View v) {
@@ -86,7 +95,6 @@ public class LoadingActivity extends AppCompatActivity {
             String rePwd=intent.getStringExtra("signup_cfmpass");
             img.setVisibility(View.GONE);
 
-            //String url ="https://uiot.ixxc.dev/auth/realms/master/protocol/openid-connect/auth?client_id=openremote&redirect_uri=https%3A%2F%2Fuiot.ixxc.dev%2Fmanager%2F&state=ec4fb068-fcb9-4247-870f-caceaf59bc0f&response_mode=fragment&response_type=code&scope=openid&nonce=e2762ea1-2f4f-4343-9738-ffa814e3274a/";
             webView.getSettings().setJavaScriptEnabled(true);
             webView.getSettings().setLoadWithOverviewMode(true);
             webView.getSettings().setUseWideViewPort(true);
@@ -96,8 +104,7 @@ public class LoadingActivity extends AppCompatActivity {
             webView.getSettings().setGeolocationEnabled(false);
             webView.getSettings().setSaveFormData(false);
 
-            String baseurl ="https://uiot.ixxc.dev";
-            //webView.setWebViewClient(new WebViewClient());
+            webView.setWebViewClient(new WebViewClient());
             webView.setWebViewClient(new WebViewClient() {
                 @Override
                 public void onPageFinished(WebView view, String url) {
@@ -121,11 +128,9 @@ public class LoadingActivity extends AppCompatActivity {
                                 view.evaluateJavascript(pwdScript, null);
                                 view.evaluateJavascript(rePwdScript, null);
                                 view.evaluateJavascript("document.getElementById('kc-register-form').submit();", null);
-
                                 CallSignUpService(usr, pwd);
                             }
                         });
-
                     }
                 }
                 @Override
@@ -157,12 +162,12 @@ public class LoadingActivity extends AppCompatActivity {
                             String ResponseJson = response.body().string();
                             Gson objGson = new Gson();
                             tokenResponse objResp=objGson.fromJson(ResponseJson, tokenResponse.class);
-                            token = objResp.getAccess_token();
-                            APIClient1.token = token;
+                            APIClient1.token = objResp.getAccess_token();
                             //Toast.makeText(LoadingActivity.this, "Token success", Toast.LENGTH_SHORT).show();
                             Toast.makeText(LoadingActivity.this, APIClient1.token, Toast.LENGTH_SHORT).show();
                             TextView text = findViewById(R.id.text_wait);
                             text.setText("Success");
+
                             Executor executor = Executors.newSingleThreadExecutor();
                             CompletableFuture.supplyAsync(() -> {
                                 async = new AsyncTasks(LoadingActivity.this);
@@ -217,8 +222,6 @@ public class LoadingActivity extends AppCompatActivity {
 
     }
     private void CallSignUpService(String name, String pass){
-        ProgressBar progressBar = findViewById(R.id.progress);
-        progressBar.setVisibility(View.VISIBLE);
         try{
             final String id = name;
             final String key = pass;
@@ -232,20 +235,50 @@ public class LoadingActivity extends AppCompatActivity {
                             String ResponseJson = response.body().string();
                             Gson objGson = new Gson();
                             tokenResponse objResp=objGson.fromJson(ResponseJson, tokenResponse.class);
-                            token = objResp.getAccess_token();
-                            Toast.makeText(LoadingActivity.this, token, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(LoadingActivity.this, "Token success", Toast.LENGTH_SHORT).show();
+                            APIClient1.token = objResp.getAccess_token();
+                            //Toast.makeText(LoadingActivity.this, "Token success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoadingActivity.this, APIClient1.token, Toast.LENGTH_SHORT).show();
                             TextView text = findViewById(R.id.text_wait);
                             text.setText("Success");
-                            progressBar.setVisibility(View.GONE);
+
+                            Executor executor = Executors.newSingleThreadExecutor();
+                            CompletableFuture.supplyAsync(() -> {
+                                async = new AsyncTasks(LoadingActivity.this);
+                                async.execute();
+                                try {
+                                    // Gọi get() để đợi AsyncTask hoàn thành và trả về kết quả
+                                    return async.get();
+                                } catch (InterruptedException | ExecutionException e) {
+                                    e.printStackTrace();
+                                    return null;
+                                }
+                            }, executor).thenAccept(result -> {
+                                // Xử lý kết quả ở đây sau khi AsyncTask hoàn thành
+                                if (result == "done"){
+                                    Log.d("Done Async", "Finish");
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            //Toast.makeText(LoadingActivity.this, User.getMe().username, Toast.LENGTH_SHORT).show();
+                                            progressBar.setVisibility(View.GONE);
+                                            Intent it = new Intent(LoadingActivity.this, HomeActivity.class);
+                                            startActivity(it);
+                                        }
+                                    });
+                                }
+                            });
                         }
                         catch (Exception e){
                             e.printStackTrace();
                             Toast.makeText(LoadingActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                            Log.d("Error", "API error");
                         }
                     }
                     else{
-                        Toast.makeText(LoadingActivity.this, "Invalid, Try again", Toast.LENGTH_SHORT).show();
+                        Log.d("Sign Up", "Invalid, Try again");
+//                        TextView text = findViewById(R.id.text_wait);
+//                        text.setText("Login Failed \n Please try again!");
+//                        progressBar.setVisibility(View.GONE);
                     }
                 }
                 @Override

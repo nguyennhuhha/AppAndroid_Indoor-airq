@@ -85,6 +85,12 @@ public class Utils {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM");
         return df.format(c.getTime());
     }
+    public static String formatLongToDate1(long timeLong) {
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(timeLong);
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        return df.format(c.getTime());
+    }
     public static String formatLongToMonth(long timeLong) {
         Calendar c = Calendar.getInstance();
         c.setTimeInMillis(timeLong);

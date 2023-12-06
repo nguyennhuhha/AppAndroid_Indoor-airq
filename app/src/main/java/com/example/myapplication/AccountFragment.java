@@ -46,7 +46,7 @@ public class AccountFragment extends Fragment {
 
         name.setText(User.getMe().username);
         email.setText(User.getMe().email);
-        first.setText(Utils.formatLongToDate(User.getMe().createdOn));
+        first.setText(Utils.formatLongToDate1(User.getMe().createdOn));
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -58,22 +58,13 @@
             android:id="@+id/iv_weather_desc"
             android:layout_width="86dp"
             android:layout_height="86dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
             android:contentDescription="@string/weather_image"
-            android:src="@drawable/cloudy"
-            app:layout_constraintStart_toStartOf="@+id/tv_weather_desc"
-            app:layout_constraintTop_toBottomOf="@+id/iv_user_1" />
-
-        <TextView
-            android:id="@+id/tv_weather_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:text="@string/sample_mostly_sunny"
-            android:textColor="@color/black"
-            android:textSize="20sp"
+            android:src="@drawable/cloudy_sun_icon"
+            app:layout_constraintTop_toBottomOf="@+id/iv_user_1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_weather_desc" />
+            />
 
         <TextView
             android:id="@+id/tv_temper"
@@ -96,16 +87,6 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_temper"
             app:layout_constraintEnd_toEndOf="@+id/tv_temper" />
-
-        <TextView
-            android:id="@+id/tv_max_min_temper"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sample_degrees"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/tv_temper"
-            app:layout_constraintTop_toBottomOf="@+id/tv_temper" />
 
         <ProgressBar
             android:id="@+id/pb_username"

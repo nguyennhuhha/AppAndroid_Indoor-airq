@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Printer;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -48,11 +49,6 @@ public class LoadingActivity extends AppCompatActivity {
     private AsyncTasks async;
     private ProgressBar progressBar;
     private String baseurl = "https://uiot.ixxc.dev";
-//    private String client = "openremote";
-//    private String encodedBaseurl = baseurl.replace(":","%3A").replace("/","%2F");
-//    private String signUpurl = baseurl +
-//            "auth/realms/master/protocol/openid-connect/auth?response_type=code&client_id=" +
-//            client + "&redirect_uri=" + encodedBaseurl + "swagger%2Foauth2-redirect.html&state=AAAA";
 
     @Override
     //quay trở về trang trước
@@ -93,17 +89,12 @@ public class LoadingActivity extends AppCompatActivity {
             String pwd = intent.getStringExtra("signup_pass");
             String rePwd=intent.getStringExtra("signup_cfmpass");
             img.setVisibility(View.GONE);
+            CookieManager cm = CookieManager.getInstance();
+            cm.removeAllCookie();
 
             webView.getSettings().setJavaScriptEnabled(true);
-            webView.getSettings().setLoadWithOverviewMode(true);
-            webView.getSettings().setUseWideViewPort(true);
-            webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-            webView.getSettings().setDatabaseEnabled(false);
-            webView.getSettings().setDomStorageEnabled(true);
-            webView.getSettings().setGeolocationEnabled(false);
-            webView.getSettings().setSaveFormData(false);
 
-            webView.setWebViewClient(new WebViewClient());
+            //webView.setWebViewClient(new WebViewClient());
             webView.setWebViewClient(new WebViewClient() {
                 @Override
                 public void onPageFinished(WebView view, String url) {
@@ -132,18 +123,22 @@ public class LoadingActivity extends AppCompatActivity {
                         });
                     }
                 }
-                @Override
-                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    // Xử lý chuyển hướng sau khi nhấn nút
-                    if (url.startsWith(baseurl)) {
-                        view.loadUrl(url);
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
+//                @Override
+//                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                    // Xử lý chuyển hướng sau khi nhấn nút
+//                    if (url.startsWith(baseurl)) {
+//                        view.loadUrl(url);
+//                        return true;
+//                    } else {
+//                        return false;
+//                    }
+//                }
             });
             webView.loadUrl(baseurl);
+            webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+            webView.clearHistory();
+            webView.clearFormData();
+            webView.clearSslPreferences();
         }
 
     }
@@ -163,7 +158,7 @@ public class LoadingActivity extends AppCompatActivity {
                             tokenResponse objResp=objGson.fromJson(ResponseJson, tokenResponse.class);
                             APIClient1.token = objResp.getAccess_token();
                             //Toast.makeText(LoadingActivity.this, "Token success", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(LoadingActivity.this, APIClient1.token, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoadingActivity.this, APIClient1.token, Toast.LENGTH_SHORT).show();
                             TextView text = findViewById(R.id.text_wait);
                             text.setText("Success");
 
@@ -236,7 +231,7 @@ public class LoadingActivity extends AppCompatActivity {
                             tokenResponse objResp=objGson.fromJson(ResponseJson, tokenResponse.class);
                             APIClient1.token = objResp.getAccess_token();
                             //Toast.makeText(LoadingActivity.this, "Token success", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(LoadingActivity.this, APIClient1.token, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoadingActivity.this, APIClient1.token, Toast.LENGTH_SHORT).show();
                             TextView text = findViewById(R.id.text_wait);
                             text.setText("Success");
 

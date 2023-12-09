@@ -31,23 +31,6 @@ public class APIManager {
     private static final APIInterface userAI = apiClient.getClient().create(APIInterface.class);
     private static final APIInterface userAI1 = apiClient1.getClient().create(APIInterface.class);
 
-    public static void getToken(String id, String key) {
-        Call<ResponseBody> call =  userAI.getToken("openremote",id,key,"password");
-        try {
-            Response<ResponseBody> response = call.execute();
-            if (response.isSuccessful()) {
-                String ResponseJson = response.body().string();
-                Gson objGson = new Gson();
-                tokenResponse objResp=objGson.fromJson(ResponseJson, tokenResponse.class);
-                String token = objResp.getAccess_token();
-            }
-            else {
-                Log.d("API LOG", "getToken: Not Successful"); }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     //get user
     public static void getUserInfo() {
         Call<User> call = userAI1.getUserInfo();

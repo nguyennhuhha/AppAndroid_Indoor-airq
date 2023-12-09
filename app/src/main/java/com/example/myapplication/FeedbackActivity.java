@@ -126,6 +126,10 @@ public class FeedbackActivity extends AppCompatActivity {
         Log.d("Fb1", a.username + a.email + a.time + a.overall + a.degree + a.wind + a.other);
         FeedbackHandler db = new FeedbackHandler(v.getContext());
         db.addFB(a);
+        cbTemp1.setChecked(false); cbTemp2.setChecked(false); cbTemp3.setChecked(false);
+        cbWind1.setChecked(false); cbWind2.setChecked(false); cbWind3.setChecked(false);
+        cbOver1.setChecked(false); cbOver2.setChecked(false); cbOver3.setChecked(false);
+        cbOther1.setChecked(false); cbOther2.setChecked(false); cbOther3.setChecked(false);
         Intent it = new Intent(FeedbackActivity.this, OtherFeedback.class);
         startActivity(it);
     }

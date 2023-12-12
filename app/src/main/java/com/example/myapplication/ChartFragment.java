@@ -47,7 +47,7 @@ public class ChartFragment extends Fragment {
     private String[] timeframes = {"Day", "Month", "Year"};
     private String attribute, timeframe;
     private DatePickerDialog datePickerDialog;
-    List<Datapoint> datapointList;
+    private List<Datapoint> datapointList = new ArrayList<>();
 
     private LineChart chart;
     private String id,datetime = null,monthtime=null;
@@ -72,8 +72,8 @@ public class ChartFragment extends Fragment {
         dropdown_menu(mView);
         pickDate(mView);
 
-        //
         Initial(mView);
+
         return mView;
     }
 
@@ -152,51 +152,43 @@ public class ChartFragment extends Fragment {
     private void process_endingDate(List<Datapoint> listdatapoint,List<Datapoint> datapoints,String datetime, String timeframe){
         long timestamp = 1701848814712L;
         long timesmonth = 1698835169710L;
-        String hourtime = "23:59:59 " + datetime;
+        String endday = "23:59:59 " + datetime;
+        String beginday ="00:00:00 " + datetime;
+        String startmonth = "00:00:00 " + monthtime;
         long timesday = 1698796800000L;
         if (datetime==null){
-            Toast.makeText(context, "Pick date ending", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Day ending is not selected", Toast.LENGTH_SHORT).show();
         } else {
-            timestamp = Utils.convertHourTime(hourtime);
-            timesmonth = Utils.convertTime(monthtime);
-            timesday = Utils.convertHourTime(hourtime);
+            timestamp = Utils.convertHourTime(endday);
+            timesmonth = Utils.convertHourTime(startmonth);
+            timesday = Utils.convertHourTime(beginday);
         }
-        for (int i = datapoints.size() - 1; i >= 0; i--) {
-            long timestamppoint = datapoints.get(i).getTimestamp();
-            if (timestamppoint <= timestamp) {
-                listdatapoint.add(new Datapoint(datapoints.get(i).getTimestamp(), datapoints.get(i).getValue()));
-            } else {
-                break;
+        if(timeframe.equals("Year")) {
+            for (int i = datapoints.size() - 1; i >= 0; i--) {
+                long timestamppoint = datapoints.get(i).getTimestamp();
+                if (timestamppoint <= timestamp) {
+                    listdatapoint.add(new Datapoint(datapoints.get(i).getTimestamp(), datapoints.get(i).getValue()));
+                } else {
+                    break;
+                }
             }
+        } else if(timeframe.equals("Month")) {
+            for (int i = datapoints.size() - 1; i >= 0; i--) {
+                long timestamppoint = datapoints.get(i).getTimestamp();
+                if (timestamppoint >= timesmonth && timestamppoint <= timestamp) {
+                    listdatapoint.add(new Datapoint(datapoints.get(i).getTimestamp(), datapoints.get(i).getValue()));
+                }
+            }
+        } else if (timeframe.equals("Day")) {
+            for (int i = datapoints.size() - 1; i >= 0; i--) {
+                long timestamppoint = datapoints.get(i).getTimestamp();
+                if (timestamppoint >= timesday && timestamppoint <= timestamp) {
+                    listdatapoint.add(new Datapoint(datapoints.get(i).getTimestamp(), datapoints.get(i).getValue()));
+                }
+            }
+        } else {
+            Toast.makeText(context, "No timeframes are selected", Toast.LENGTH_SHORT).show();
         }
-//        if(timeframe.equals("Year")) {
-//            for (int i = datapoints.size() - 1; i >= 0; i--) {
-//                long timestamppoint = datapoints.get(i).getTimestamp();
-//                if (timestamppoint <= timestamp) {
-//                    listdatapoint.add(new Datapoint(datapoints.get(i).getTimestamp(), datapoints.get(i).getValue()));
-//                } else {
-//                    break;
-//                }
-//            }
-//        } else if(timeframe.equals("Month")) {
-//            for (int i = datapoints.size() - 1; i >= 0; i--) {
-//                long timestamppoint = datapoints.get(i).getTimestamp();
-//                if ((timestamppoint >= timesmonth) && (timestamppoint<= timestamp)) {
-//                    listdatapoint.add(new Datapoint(datapoints.get(i).getTimestamp(), datapoints.get(i).getValue()));
-//                } else {
-//                    break;
-//                }
-//            }
-//        } else if (timeframe.equals("Day")) {
-//            for (int i = datapoints.size() - 1; i >= 0; i--) {
-//                long timestamppoint = datapoints.get(i).getTimestamp();
-//                if ((timestamppoint >= timesday) && (timestamppoint<= timestamp)) {
-//                    listdatapoint.add(new Datapoint(datapoints.get(i).getTimestamp(), datapoints.get(i).getValue()));
-//                } else {
-//                    break;
-//                }
-//            }
-//        }
     }
 
     private void Initial(View view) {
@@ -208,28 +200,17 @@ public class ChartFragment extends Fragment {
             public void onClick(View v) {
                 if(attribute.equals("Rainfall (mm)")) {
                     List<Datapoint> datapoints = Datapoint.getDatapointRainfallList();
-//                    if(datapointList != null) {
-//                        datapointList = null;
-//                        datapointList = new ArrayList<>();
-//                    } else {
-//                        datapointList= new ArrayList<>();
-//                    }
-                    List<Datapoint> dataRain = new ArrayList<>();
-                    process_endingDate(dataRain,datapoints, datetime, timeframe);
-                    String[] mDays = new String[dataRain.size()];
-                    float[] mData = new float[dataRain.size()];
+                    datapointList.clear();
+                    process_endingDate(datapointList,datapoints, datetime, timeframe);
+                    String[] mDays = new String[datapointList.size()];
+                    float[] mData = new float[datapointList.size()];
 
-                    timeframe_process(dataRain,mDays,mData);
+                    timeframe_process(datapointList,mDays,mData);
 
                     setUpChart(chart, mDays, mData, attribute,timeframe);
                 } else if (attribute.equals("Humidity (%)")) {
                     List<Datapoint> datapoints = Datapoint.getDatapointHumidityList();
-                    if(datapointList != null) {
-                        datapointList = null;
-                        datapointList = new ArrayList<>();
-                    } else {
-                        datapointList= new ArrayList<>();
-                    }
+                    datapointList.clear();
                     process_endingDate(datapointList,datapoints,datetime,timeframe);
                     String[] mDays = new String[datapointList.size()];
                     float[] mData = new float[datapointList.size()];
@@ -239,29 +220,18 @@ public class ChartFragment extends Fragment {
                     setUpChart(chart, mDays, mData, attribute,timeframe);
                 } else if (attribute.equals("Temperature (°C)")) {
                     List<Datapoint> datapoints = Datapoint.getDatapointTemperatureList();
-//                    if(datapointList != null) {
-//                        datapointList = null;
-//                        datapointList = new ArrayList<>();
-//                    } else {
-//                        datapointList= new ArrayList<>();
-//                    }
-                    List<Datapoint> dataTemp = new ArrayList<>();
-                    process_endingDate(dataTemp,datapoints,datetime,timeframe);
+                    datapointList.clear();
+                    process_endingDate(datapointList,datapoints,datetime,timeframe);
 
-                    String[] mDays = new String[dataTemp.size()];
-                    float[] mData = new float[dataTemp.size()];
+                    String[] mDays = new String[datapointList.size()];
+                    float[] mData = new float[datapointList.size()];
 
-                    timeframe_process(dataTemp,mDays,mData);
+                    timeframe_process(datapointList,mDays,mData);
 
                     setUpChart(chart, mDays, mData, attribute,timeframe);
                 } else if (attribute.equals("Wind speed (km/h)")) {
                     List<Datapoint> datapoints = Datapoint.getDatapointWindspeedList();
-                    if(datapointList != null) {
-                        datapointList = null;
-                        datapointList = new ArrayList<>();
-                    } else {
-                        datapointList= new ArrayList<>();
-                    }
+                    datapointList.clear();
                     process_endingDate(datapointList,datapoints,datetime,timeframe);
 
                     String[] mDays = new String[datapointList.size()];
@@ -286,22 +256,15 @@ public class ChartFragment extends Fragment {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);  // đưa trục X xuống dưới
         xAxis.setDrawGridLines(false);      //bỏ kẻ ô
         //Khoảng cách của các điểm x
-        if(timeframe.equals("Day")) {
-            xAxis.setGranularity(2f);
-        } else if(timeframe.equals("Month")) {
-            xAxis.setGranularity(2f);
-        } else if(timeframe.equals("Year")) {
-            xAxis.setGranularity(5f);
-        }
+        xAxis.setGranularity(2f);
         xAxis.setLabelCount(mData.length);
         xAxis.setValueFormatter(new IndexAxisValueFormatter(mDays));
 
         YAxis yAxisRight = chart.getAxisRight();
         YAxis yAxisLeft = chart.getAxisLeft();
-//        yAxisRight.setEnabled(false);      // bỏ trục Y bên phải
         xAxis.setAxisLineWidth(2f);     // độ dày của trục X,Y
         yAxisLeft.setAxisLineWidth(2f);
-//        yAxisLeft.setGranularity(1f); //khoảng cach giua các diem Y
+        yAxisRight.setAxisLineWidth(2f);
         xAxis.setAxisLineColor(R.color.dark_greenlv1); // Màu của đường trục X
         yAxisLeft.setAxisLineColor(R.color.dark_greenlv1);
 
@@ -321,8 +284,9 @@ public class ChartFragment extends Fragment {
         dataSets.add(barDataSet);
         LineData data = new LineData(dataSets);
         chart.setData(data);
+
         // hien thi so du lieu tren bieu do
-        chart.setVisibleXRangeMaximum(10);
+        chart.setVisibleXRangeMaximum(15);
         chart.getXAxis().setSpaceMax(1);
         chart.setEnabled(false);
         chart.setBackgroundColor(ContextCompat.getColor(context, R.color.yellowchart));

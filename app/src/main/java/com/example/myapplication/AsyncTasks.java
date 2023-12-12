@@ -12,6 +12,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.time.Instant;
+import java.util.Calendar;
+import java.time.Clock;
+
+
 public class AsyncTasks extends AsyncTask<String, Long, String> {
     private Context context;
     public AsyncTasks(Context context){
@@ -39,27 +44,44 @@ public class AsyncTasks extends AsyncTask<String, Long, String> {
             APIManager.getMap();
         }
         if (Datapoint.getDatapointRainfallList() == null) {
-            String queryString = "{ \"fromTimestamp\": 1698834342208, \"toTimestamp\": 1701771942208, \"fromTime\": \"2023-11-01T07:13:07.945Z\", \"toTime\": \"2023-12-05T10:25:42.208Z\", \"type\": \"string\" }";
+//            String queryString = "{ \"fromTimestamp\": 1698834342208, \"toTimestamp\": 1701771942208, \"fromTime\": \"2023-11-01T07:13:07.945Z\", \"toTime\": \"2023-12-05T10:25:42.208Z\", \"type\": \"string\" }";
+            long time = Calendar.getInstance().getTimeInMillis();
+            String datetime = Utils.formatLongToDateHour(time);
+            String queryString = "{ \"fromTimestamp\": 1698834342208, \"toTimestamp\": REPLACE_TIMESTAMP, \"fromTime\": \"2023-11-01T07:13:07.945Z\", \"toTime\": \"REPLACE_DATETIME\", \"type\": \"string\" }";
+            String replacedQueryString = queryString.replace("REPLACE_TIMESTAMP", String.valueOf(time));
+            replacedQueryString = replacedQueryString.replace("REPLACE_DATETIME", datetime);
             JsonParser jsonParser = new JsonParser();
-            JsonObject query = jsonParser.parse(queryString).getAsJsonObject();
+            JsonObject query = jsonParser.parse(replacedQueryString).getAsJsonObject();
             APIManager.getDataPointRainfall("5zI6XqkQVSfdgOrZ1MyWEf","rainfall",query);
         }
         if (Datapoint.getDatapointTemperatureList() == null) {
-            String queryString = "{ \"fromTimestamp\": 1698834342208, \"toTimestamp\": 1701771942208, \"fromTime\": \"2023-11-01T07:13:07.945Z\", \"toTime\": \"2023-12-05T10:25:42.208Z\", \"type\": \"string\" }";
+            long time = Calendar.getInstance().getTimeInMillis();
+            String datetime = Utils.formatLongToDateHour(time);
+            String queryString = "{ \"fromTimestamp\": 1698834342208, \"toTimestamp\": REPLACE_TIMESTAMP, \"fromTime\": \"2023-11-01T07:13:07.945Z\", \"toTime\": \"REPLACE_DATETIME\", \"type\": \"string\" }";
+            String replacedQueryString = queryString.replace("REPLACE_TIMESTAMP", String.valueOf(time));
+            replacedQueryString = replacedQueryString.replace("REPLACE_DATETIME", datetime);
             JsonParser jsonParser = new JsonParser();
-            JsonObject query = jsonParser.parse(queryString).getAsJsonObject();
+            JsonObject query = jsonParser.parse(replacedQueryString).getAsJsonObject();
             APIManager.getDataPointTemperature("5zI6XqkQVSfdgOrZ1MyWEf","temperature",query);
         }
         if (Datapoint.getDatapointHumidityList() == null) {
-            String queryString = "{ \"fromTimestamp\": 1698834342208, \"toTimestamp\": 1701771942208, \"fromTime\": \"2023-11-01T07:13:07.945Z\", \"toTime\": \"2023-12-05T10:25:42.208Z\", \"type\": \"string\" }";
+            long time = Calendar.getInstance().getTimeInMillis();
+            String datetime = Utils.formatLongToDateHour(time);
+            String queryString = "{ \"fromTimestamp\": 1698834342208, \"toTimestamp\": REPLACE_TIMESTAMP, \"fromTime\": \"2023-11-01T07:13:07.945Z\", \"toTime\": \"REPLACE_DATETIME\", \"type\": \"string\" }";
+            String replacedQueryString = queryString.replace("REPLACE_TIMESTAMP", String.valueOf(time));
+            replacedQueryString = replacedQueryString.replace("REPLACE_DATETIME", datetime);
             JsonParser jsonParser = new JsonParser();
-            JsonObject query = jsonParser.parse(queryString).getAsJsonObject();
+            JsonObject query = jsonParser.parse(replacedQueryString).getAsJsonObject();
             APIManager.getDataPointHumidity("5zI6XqkQVSfdgOrZ1MyWEf","humidity",query);
         }
         if (Datapoint.getDatapointWindspeedList() == null) {
-            String queryString = "{ \"fromTimestamp\": 1698834342208, \"toTimestamp\": 1701771942208, \"fromTime\": \"2023-11-01T07:13:07.945Z\", \"toTime\": \"2023-12-05T10:25:42.208Z\", \"type\": \"string\" }";
+            long time = Calendar.getInstance().getTimeInMillis();
+            String datetime = Utils.formatLongToDateHour(time);
+            String queryString = "{ \"fromTimestamp\": 1698834342208, \"toTimestamp\": REPLACE_TIMESTAMP, \"fromTime\": \"2023-11-01T07:13:07.945Z\", \"toTime\": \"REPLACE_DATETIME\", \"type\": \"string\" }";
+            String replacedQueryString = queryString.replace("REPLACE_TIMESTAMP", String.valueOf(time));
+            replacedQueryString = replacedQueryString.replace("REPLACE_DATETIME", datetime);
             JsonParser jsonParser = new JsonParser();
-            JsonObject query = jsonParser.parse(queryString).getAsJsonObject();
+            JsonObject query = jsonParser.parse(replacedQueryString).getAsJsonObject();
             APIManager.getDataPointWindSpeed("5zI6XqkQVSfdgOrZ1MyWEf","windSpeed",query);
         }
         return "done";

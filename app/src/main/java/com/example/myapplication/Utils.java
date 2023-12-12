@@ -92,5 +92,11 @@ public class Utils {
         SimpleDateFormat df = new SimpleDateFormat("HH:mm");
         return df.format(c.getTime());
     }
+    public static String formatLongToDateHour(long timeLong) {
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(timeLong);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        return df.format(c.getTime());
+    }
 
 }

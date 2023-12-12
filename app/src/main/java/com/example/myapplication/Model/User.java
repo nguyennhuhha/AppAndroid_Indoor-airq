@@ -12,15 +12,10 @@ public class User {
     public String username;
     @SerializedName("id")
     public String id;
-    @SerializedName("firstName")
-    public String firstName = "";
-    @SerializedName("lastName")
-    public String lastName = "";
     @SerializedName("email")
     public String email = "";
     @SerializedName("createdOn")
     public long createdOn;
-
     // Current logged in user
     private static User me;
     public static void setMe(User u) {

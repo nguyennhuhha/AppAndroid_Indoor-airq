@@ -1,4 +1,4 @@
-package com.example.myapplication.RestAPI;
+package com.example.myapplication.API;
 
 import java.io.IOException;
 import java.security.cert.CertificateException;

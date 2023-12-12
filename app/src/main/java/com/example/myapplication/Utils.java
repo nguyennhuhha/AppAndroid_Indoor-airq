@@ -54,32 +54,31 @@ public class Utils {
         return date.getTime();
     }
 
-    public static String getDateNow() {
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        String time = df.format(c.getTime());
-        return time;
-    }
-
-
+    // dd/MM
     public static String formatLongToDate(long timeLong) {
         Calendar c = Calendar.getInstance();
         c.setTimeInMillis(timeLong);
         SimpleDateFormat df = new SimpleDateFormat("dd/MM");
         return df.format(c.getTime());
     }
+
+    // dd/MM/yyyy
     public static String formatLongToDate1(long timeLong) {
         Calendar c = Calendar.getInstance();
         c.setTimeInMillis(timeLong);
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         return df.format(c.getTime());
     }
+
+    // MM/yyyy
     public static String formatLongToMonth(long timeLong) {
         Calendar c = Calendar.getInstance();
         c.setTimeInMillis(timeLong);
         SimpleDateFormat df = new SimpleDateFormat("MM/yyyy");
         return df.format(c.getTime());
     }
+
+    // yyyy
     public static String formatLongToYear(long timeLong) {
         Calendar c = Calendar.getInstance();
         c.setTimeInMillis(timeLong);

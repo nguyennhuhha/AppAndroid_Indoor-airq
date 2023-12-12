@@ -1,13 +1,10 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-import android.net.http.SslError;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Printer;
 import android.view.View;
 import android.webkit.CookieManager;
-import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -18,18 +15,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.Model.Device;
-import com.example.myapplication.Model.Map;
-import com.example.myapplication.Model.User;
-import com.example.myapplication.Model.WeatherDevice;
-import com.example.myapplication.RestAPI.APIClient;
-import com.example.myapplication.RestAPI.APIClient1;
-import com.example.myapplication.RestAPI.APIInterface;
-import com.example.myapplication.RestAPI.APIManager;
-import com.example.myapplication.RestAPI.tokenResponse;
+import com.example.myapplication.API.APIClient;
+import com.example.myapplication.API.APIClient1;
+import com.example.myapplication.API.APIInterface;
+import com.example.myapplication.API.Token;
 import com.google.gson.Gson;
 
-import java.text.SimpleDateFormat;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
@@ -41,11 +32,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoadingActivity extends AppCompatActivity {
-    private WebView webView, webView1;
+    private WebView webView;
     private ImageView img;
-    public String token;
-    public String api;
-
     private AsyncTasks async;
     private ProgressBar progressBar;
     private String baseurl = "https://uiot.ixxc.dev";
@@ -54,7 +42,6 @@ public class LoadingActivity extends AppCompatActivity {
     //quay trở về trang trước
     public void onBackPressed() {
         super.onBackPressed();
-        // Thực hiện các hành động cần thiết khi quay lại trang trước
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +50,7 @@ public class LoadingActivity extends AppCompatActivity {
         img = findViewById(R.id.back_btn);
         webView = findViewById(R.id.web_login);
         progressBar=findViewById(R.id.progress);
-        TextView text = findViewById(R.id.text_wait);
 
-        //Log.d("url", signUpurl);
         img.setOnClickListener(new View.OnClickListener() {//quay về trang trước
             @Override
             public void onClick(View v) {
@@ -98,7 +83,6 @@ public class LoadingActivity extends AppCompatActivity {
             webView.setWebViewClient(new WebViewClient() {
                 @Override
                 public void onPageFinished(WebView view, String url) {
-                    //super.onPageFinished(view, url);
                     // Tìm và nhấn vào nút sau khi trang đã tải xong
                     if (url.contains(baseurl + "/auth/realms/master/protocol/openid-connect/auth?client_id=openremote")) {
                         // Thực hiện click vào nút SIGN UP khi địa chỉ URL khớp
@@ -123,16 +107,6 @@ public class LoadingActivity extends AppCompatActivity {
                         });
                     }
                 }
-//                @Override
-//                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                    // Xử lý chuyển hướng sau khi nhấn nút
-//                    if (url.startsWith(baseurl)) {
-//                        view.loadUrl(url);
-//                        return true;
-//                    } else {
-//                        return false;
-//                    }
-//                }
             });
             webView.loadUrl(baseurl);
             webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
@@ -155,7 +129,7 @@ public class LoadingActivity extends AppCompatActivity {
                         try {
                             String ResponseJson = response.body().string();
                             Gson objGson = new Gson();
-                            tokenResponse objResp=objGson.fromJson(ResponseJson, tokenResponse.class);
+                            Token objResp=objGson.fromJson(ResponseJson, Token.class);
                             APIClient1.token = objResp.getAccess_token();
                             //Toast.makeText(LoadingActivity.this, "Token success", Toast.LENGTH_SHORT).show();
                             //Toast.makeText(LoadingActivity.this, APIClient1.token, Toast.LENGTH_SHORT).show();
@@ -175,12 +149,11 @@ public class LoadingActivity extends AppCompatActivity {
                                 }
                             }, executor).thenAccept(result -> {
                                 // Xử lý kết quả ở đây sau khi AsyncTask hoàn thành
-                                if (result == "done"){
+                                if ("done".equals(result)){
                                     Log.d("Done Async", "Finish");
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            //Toast.makeText(LoadingActivity.this, User.getMe().username, Toast.LENGTH_SHORT).show();
                                             progressBar.setVisibility(View.GONE);
                                             Intent it = new Intent(LoadingActivity.this, HomeActivity.class);
                                             startActivity(it);
@@ -228,10 +201,8 @@ public class LoadingActivity extends AppCompatActivity {
                         try {
                             String ResponseJson = response.body().string();
                             Gson objGson = new Gson();
-                            tokenResponse objResp=objGson.fromJson(ResponseJson, tokenResponse.class);
+                            Token objResp=objGson.fromJson(ResponseJson, Token.class);
                             APIClient1.token = objResp.getAccess_token();
-                            //Toast.makeText(LoadingActivity.this, "Token success", Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(LoadingActivity.this, APIClient1.token, Toast.LENGTH_SHORT).show();
                             TextView text = findViewById(R.id.text_wait);
                             text.setText("Success");
 
@@ -248,12 +219,11 @@ public class LoadingActivity extends AppCompatActivity {
                                 }
                             }, executor).thenAccept(result -> {
                                 // Xử lý kết quả ở đây sau khi AsyncTask hoàn thành
-                                if (result == "done"){
+                                if ("done".equals(result)){
                                     Log.d("Done Async", "Finish");
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            //Toast.makeText(LoadingActivity.this, User.getMe().username, Toast.LENGTH_SHORT).show();
                                             progressBar.setVisibility(View.GONE);
                                             Intent it = new Intent(LoadingActivity.this, HomeActivity.class);
                                             startActivity(it);
@@ -270,9 +240,6 @@ public class LoadingActivity extends AppCompatActivity {
                     }
                     else{
                         Log.d("Sign Up", "Invalid, Try again");
-//                        TextView text = findViewById(R.id.text_wait);
-//                        text.setText("Login Failed \n Please try again!");
-//                        progressBar.setVisibility(View.GONE);
                     }
                 }
                 @Override

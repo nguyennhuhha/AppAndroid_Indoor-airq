@@ -1,4 +1,4 @@
-package com.example.myapplication.RestAPI;
+package com.example.myapplication.API;
 
 import com.example.myapplication.Model.Device;
 import com.example.myapplication.Model.Map;
@@ -6,7 +6,6 @@ import com.example.myapplication.Model.Datapoint;
 import com.example.myapplication.Model.User;
 import com.google.gson.JsonObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -18,9 +17,10 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import rx.Observable;
 
 public interface APIInterface {
+
+    //Get token
     @FormUrlEncoded
     @POST("auth/realms/master/protocol/openid-connect/token")
     @Headers({
@@ -34,10 +34,6 @@ public interface APIInterface {
     // Get user info
     @GET("api/master/user/user")
     Call<User> getUserInfo();
-
-    // Get asset
-    @GET("api/master/asset/{assetID}")
-    Call<Device> getDevice(@Path("assetID") String deviceID);
 
     // Get Maps data
     @GET("api/master/map")

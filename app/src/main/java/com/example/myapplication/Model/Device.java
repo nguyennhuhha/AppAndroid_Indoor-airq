@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import androidx.core.content.res.ResourcesCompat;
 
@@ -26,22 +27,14 @@ public class Device {
     public String id;
     @SerializedName("version")
     public String version;
-    @SerializedName("createdOn")
-    public long createdOn;
     @SerializedName("name")
     public String name;
-    @SerializedName("accessPublicRead")
-    public Boolean accessPublicRead;
-    @SerializedName("realm")
-    public String realm;
     @SerializedName("type")
     public String type;
     @SerializedName("attributes")
     public JsonObject attributes;
     @SerializedName("path")
     public ArrayList<String> path;
-
-    private static Device me;
     private static final List<Device> deviceList = new ArrayList<>();
 
     public static List<Device> getDevicesList() {
@@ -60,12 +53,6 @@ public class Device {
                 deviceList.add(device);
             }
         }
-    }
-    public static void setDevice(Device u) {
-        me = u;
-    }
-    public static Device getDevice() {
-        return me;
     }
     public String getId() {
         return id;
@@ -91,22 +78,6 @@ public class Device {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public JsonObject getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(JsonObject attributes) {
-        this.attributes = attributes;
-    }
-
     public ArrayList<String> getPath() {
         return path;
     }
@@ -123,34 +94,11 @@ public class Device {
         return null;
     }
 
-    public List<Attribute> getDeviceAttribute() {
-        List<Attribute> attributeList = new ArrayList<>();
-        for (Map.Entry<String, JsonElement> entry : attributes.entrySet()) {
-            String key = entry.getKey();
-            JsonElement value = entry.getValue();
-            // Now you can work with key and value as needed
-            if (value.isJsonObject()) {
-                JsonObject o = value.getAsJsonObject();
-                Attribute attribute = new Gson().fromJson(o, Attribute.class);
-                attributeList.add(attribute);
-            }
-        }
-        return attributeList;
-    }
-
-    // Get required attributes
+    // Get attributes
     public List<Attribute> getRequiredAttributes() {
         List<Attribute> attributeList = new ArrayList<>();
-
-//        for (String key : attributes.keySet()) {
-//            JsonObject o = attributes.get(key).getAsJsonObject();
-//            Attribute attribute = new Gson().fromJson(o, Attribute.class);
-//            if (!attribute.optional && attribute.value != null && !attribute.value.isJsonObject()) {
-//                attributeList.add(attribute);
-//            }
-//        }
         for (Map.Entry<String, JsonElement> entry : attributes.entrySet()) {
-            String key = entry.getKey();
+//            String key = entry.getKey();
             JsonElement value = entry.getValue();
 
             if (value.isJsonObject()) {
@@ -158,7 +106,7 @@ public class Device {
                 Attribute attribute = new Gson().fromJson(o, Attribute.class);
 
                 // Kiểm tra điều kiện
-                if (!attribute.optional && attribute.value != null && !attribute.value.isJsonObject()) {
+                if (!attribute.value.isJsonObject()) {
                     attributeList.add(attribute);
                 }
             }
@@ -186,11 +134,7 @@ public class Device {
                 break;
             case "WeatherAsset":
                 return R.drawable.ic_weather;
-            case "RoomAsset":
-            case "DoorAsset":
-                return R.drawable.ic_door;
         }
-
         return R.drawable.baseline_lightbulb_24;
     }
 
@@ -203,7 +147,6 @@ public class Device {
         // Get pin drawable
         Drawable pin_drawable = null;
         if (resId == R.drawable.baseline_lightbulb_24){
-
             pin_drawable = ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_pin_pink, null);
         }
         else{

@@ -19,16 +19,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication.RestAPI.APIClient;
-import com.example.myapplication.RestAPI.APIInterface;
-import com.example.myapplication.RestAPI.tokenResponse;
-import com.google.gson.Gson;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class LoginTabFragment extends Fragment {
      EditText name, pass;
     @Override

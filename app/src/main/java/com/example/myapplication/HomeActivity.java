@@ -1,37 +1,23 @@
 package com.example.myapplication;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.widget.Toast;
-
-import com.example.myapplication.Model.Device;
-import com.example.myapplication.Model.Map;
-import com.example.myapplication.Model.User;
-import com.example.myapplication.Model.WeatherDevice;
-import com.example.myapplication.RestAPI.APIManager;
-import com.google.android.gms.maps.model.LatLng;
 
 import nl.joery.animatedbottombar.AnimatedBottomBar;
 
 public class HomeActivity extends AppCompatActivity {
     private FragmentManager fm;
     public AnimatedBottomBar navbar;
-    private String usr_name, temp, rain, hum, wind;
 
     public HomeFragment homeFrag;
     public MapFragment mapFrag;
     public ChartFragment chartFrag;
     public AccountFragment accFrag;
-    private FragmentTransaction ft;
-    private WeatherDevice defaultDevice;
     private Fragment fragment;
 
     int selectedIndex;
@@ -47,12 +33,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        usr_name = User.getMe().username;
-        defaultDevice = new WeatherDevice(Device.getDevice());
-        temp = defaultDevice.temperature.getValueString();
-        rain = defaultDevice.rainfall.getValueString();
-        hum = defaultDevice.humidity.getValueString();
-        wind = defaultDevice.windSpeed.getValueString();
 
         InitVars();
         InitViews();
@@ -119,26 +99,6 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    public String getUsr_name() {
-        return usr_name;
-    }
-
-    public String getTemp() {
-        return temp;
-    }
-
-    public String getRain() {
-        return rain;
-    }
-
-    public String getHum() {
-        return hum;
-    }
-
-    public String getWind() {
-        return wind;
     }
 
 }

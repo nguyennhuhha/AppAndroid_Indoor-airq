@@ -20,14 +20,6 @@ public class Map {
     public JsonObject options;
     @SerializedName("version")
     public int version;
-    @SerializedName("sources")
-    public JsonObject sources;
-    @SerializedName("sprite")
-    public String sprite;
-    @SerializedName("glyphs")
-    public String glyphs;
-    @SerializedName("layers")
-    public ArrayList<JsonObject> layers;
 
     public LatLng getCenter() {
         float lat = options.get("default").getAsJsonObject().get("center").getAsJsonArray().get(1).getAsFloat();

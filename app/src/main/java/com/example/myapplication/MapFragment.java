@@ -26,7 +26,7 @@ import com.example.myapplication.Adapter.BottomSheetAdapter;
 import com.example.myapplication.Model.Attribute;
 import com.example.myapplication.Model.Map;
 import com.example.myapplication.Model.Device;
-import com.example.myapplication.RestAPI.APIManager;
+import com.example.myapplication.API.APIManager;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -34,7 +34,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -106,9 +105,6 @@ public class MapFragment extends Fragment {
                 for (Device device : Device.getDevicesList()) {
                     BitmapDescriptor bitmap = device.getIconPinBitmap(parentActivity, device.getIconRes(device.type));
                     if (device.getPoint() == null) continue;
-
-                    JsonObject o = new JsonObject();
-                    o.addProperty("id", device.id);
 
                     // Add device markers to the map
                     MarkerOptions markerOptions = new MarkerOptions()

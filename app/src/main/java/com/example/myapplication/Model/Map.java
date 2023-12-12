@@ -55,7 +55,9 @@ public class Map {
     public float getMaxZoom() {
         return options.get("default").getAsJsonObject().get("maxZoom").getAsFloat();
     }
-
+    public boolean getBoxZoom() {
+        return options.get("default").getAsJsonObject().get("boxZoom").getAsBoolean();
+    }
     public ArrayList<Double> getBounds() {
         ArrayList<Double> bounds = new ArrayList<>();
         for (int i = 0; i < 4; i++) {

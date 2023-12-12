@@ -32,6 +32,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -116,16 +118,11 @@ public class MapFragment extends Fragment {
                     marker.setTag(device);
 
                 }
-                // camera bounds
-//                LatLngBounds.Builder builder = new LatLngBounds.Builder();
-//                builder.include(new LatLng(APIManager.bounds.get(0), APIManager.bounds.get(1)));
-//                builder.include(new LatLng(APIManager.bounds.get(2), APIManager.bounds.get(3)));
-//
-//                LatLngBounds bounds = builder.build();
-//                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 200);
-//                mapView.moveCamera(cu);
-//                mapView.setLatLngBoundsForCameraTarget(bounds);
+                //camera zoom
+                mapView.moveCamera(CameraUpdateFactory.zoomTo(APIManager.zoom));
 
+                // box zoom
+                mapView.getUiSettings().setCompassEnabled(APIManager.box);
                 //camera position
                 mapView.animateCamera(CameraUpdateFactory.newLatLngZoom(APIManager.center, APIManager.zoom+1));
 

@@ -20,6 +20,7 @@ public class APIManager {
     public static LatLng center;
     public static float zoom, min, max;
     public static ArrayList<Double> bounds;
+    public static Boolean box;
     private static final APIClient apiClient = new APIClient();
     private static final APIClient1 apiClient1 = new APIClient1();
     private static final APIInterface userAI = apiClient.getClient().create(APIInterface.class);
@@ -53,6 +54,7 @@ public class APIManager {
                 min = Map.getMapObj().getMinZoom();
                 max = Map.getMapObj().getMaxZoom();
                 bounds=Map.getMapObj().getBounds();
+                box = Map.getMapObj().getBoxZoom();
             }
         } catch (IOException e) { e.printStackTrace(); }
     }

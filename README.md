@@ -5,6 +5,9 @@
 - 1 gmail chỉ được đki tài khoản  1 lần
 # DEMO:
 Welcome , Login & Sign up page
+<img src="https://github.com/user-attachments/assets/4303b3df-51a3-4807-a59d-bded33fc7c68" alt="Mô tả ảnh" width="300"/>
+<img src="" alt="Mô tả ảnh" width="300"/>
+
 ![image](https://github.com/user-attachments/assets/4303b3df-51a3-4807-a59d-bded33fc7c68)
 ![image](https://github.com/user-attachments/assets/6396f7f9-1245-4a84-801a-35e227f9d501)
 
